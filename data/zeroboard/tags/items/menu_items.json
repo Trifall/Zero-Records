@@ -1,0 +1,23 @@
+{
+  "values": [
+    "minecraft:nether_star",
+    "minecraft:armor_stand",
+    "minecraft:white_bed",
+    "minecraft:bow",
+    "minecraft:tnt",
+    "minecraft:ender_pearl",
+    "minecraft:compass",
+    "minecraft:obsidian",
+    "minecraft:end_stone",
+    "minecraft:wooden_pickaxe",
+    "minecraft:stone_pickaxe",
+    "minecraft:iron_pickaxe",
+    "minecraft:diamond_pickaxe",
+    "minecraft:netherite_pickaxe",
+    "minecraft:golden_pickaxe",
+    "minecraft:flower_banner_pattern",
+    "minecraft:arrow",
+    "minecraft:lava_bucket",
+    "minecraft:barrier"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:entity",
+  "pools": [{"rolls": 1, "entries": [{"type": "minecraft:item", "name": "minecraft:paper", "functions": [
+    {"function": "minecraft:set_name", "entity": "this", "name": [
+      {"text": "Page ", "color": "gray"},
+      {"score": {"name": "ZPage", "objective": "zc_ctrl"}, "color": "white"},
+      {"text": "/", "color": "gray"},
+      {"score": {"name": "ZPages", "objective": "zc_ctrl"}, "color": "white"},
+      {"text": " →", "color": "gray"}
+    ]}
+  ]}]}]
+}

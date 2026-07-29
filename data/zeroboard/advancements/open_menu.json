@@ -1,0 +1,19 @@
+{
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "location": {
+          "block": {
+            "block": "minecraft:chest",
+            "nbt": "{CustomName:'{\"color\":\"dark_purple\",\"text\":\"Zero Cycle Filters\"}'}"
+          }
+        }
+      }
+    }
+  },
+  "rewards": {
+    "function": "zeroboard:menu/open"
+  }
+}
+

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:entity",
+  "pools": [{"rolls": 1, "entries": [{"type": "minecraft:item", "name": "minecraft:paper", "functions": [
+    {"function": "minecraft:set_name", "entity": "this", "name": [
+      {"text": "PB: ", "color": "light_purple", "bold": true},
+      {"score": {"name": "ZPBTotalSec", "objective": "zc_ctrl"}, "color": "gold"},
+      {"text": ".0", "color": "gold"},
+      {"score": {"name": "ZPBHun", "objective": "zc_ctrl"}, "color": "gold"},
+      {"text": "s", "color": "gold"}
+    ]}
+  ]}]}]
+}

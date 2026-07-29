@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:entity",
+  "pools": [{"rolls": 1, "entries": [{"type": "minecraft:item", "name": "minecraft:paper", "functions": [
+    {"function": "minecraft:set_name", "entity": "this", "name": [
+      {"nbt": "work.render.spawn_short", "storage": "zeroboard:records", "interpret": false, "color": "green"},
+      {"text": " \u00d8 ", "color": "red"},
+      {"nbt": "work.render.approach_short", "storage": "zeroboard:records", "interpret": false, "color": "white"}
+    ]}
+  ]}]}]
+}

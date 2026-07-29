@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "left_click_display": {
+      "trigger": "minecraft:player_hurt_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "predicate": {
+              "type": "minecraft:parrot",
+              "nbt": "{Tags:[\"zc_page_button\"]}"
+            },
+            "entity": "this"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "function": "zeroboard:display/click_next"
+  }
+}

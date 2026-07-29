@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:entity",
+  "pools": [{"rolls": 1, "entries": [{"type": "minecraft:item", "name": "minecraft:paper", "functions": [
+    {"function": "minecraft:set_name", "entity": "this", "name": [
+      {"text": "Spawn: O", "color": "green", "italic": false},
+      {"score": {"name": "ZFSpawnHeight", "objective": "zc_ctrl"}, "color": "white"}
+    ]}
+  ]}]}]
+}

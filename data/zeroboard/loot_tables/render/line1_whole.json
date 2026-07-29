@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:entity",
+  "pools": [{"rolls": 1, "entries": [{"type": "minecraft:item", "name": "minecraft:paper", "functions": [
+    {"function": "minecraft:set_name", "entity": "this", "name": [
+      {"nbt": "work.render.tower_short", "storage": "zeroboard:records", "interpret": false, "color": "dark_aqua"},
+      {"text": " Y-", "color": "aqua"},
+      {"score": {"name": "ZRStand", "objective": "zc_ctrl"}, "color": "white"},
+      {"text": ": ", "color": "gray"},
+      {"nbt": "work.render.type", "storage": "zeroboard:records", "interpret": false, "color": "light_purple"},
+      {"text": " ", "color": "gray"},
+      {"score": {"name": "ZRTotalSec", "objective": "zc_ctrl"}, "color": "gold"},
+      {"text": "s", "color": "gold"}
+    ]}
+  ]}]}]
+}

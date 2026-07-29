@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:entity",
+  "pools": [{"rolls": 1, "entries": [{"type": "minecraft:item", "name": "minecraft:paper", "functions": [
+    {"function": "minecraft:set_name", "entity": "this", "name": [
+      {"text": "Tower: ", "color": "dark_aqua", "italic": false},
+      {"nbt": "work.filter_tower", "storage": "zeroboard:records", "interpret": false, "color": "white", "italic": false}
+    ]}
+  ]}]}]
+}
