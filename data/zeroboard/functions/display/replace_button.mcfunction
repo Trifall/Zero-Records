@@ -1,4 +1,4 @@
-summon minecraft:parrot ~ ~ ~ {Invisible:1b,NoAI:1b,Silent:1b,NoGravity:1b,OnGround:1b,PersistenceRequired:1b,Tame:1b,Sitting:1b,Health:1000.0f,DeathLootTable:"zeroboard:empty",ActiveEffects:[{Id:14b,Amplifier:0b,Duration:2147483647,ShowParticles:0b,ShowIcon:0b}],Attributes:[{Name:"minecraft:generic.max_health",Base:1000.0d},{Name:"minecraft:generic.knockback_resistance",Base:1.0d}],Tags:["zc_display","zc_page_button","zc_new_button"]}
+function zeroboard:display/spawn_button
 execute as @e[type=minecraft:parrot,tag=zc_new_button,distance=..0.1,sort=nearest,limit=1] at @s run data modify entity @s Owner set from entity @p UUID
 tag @e[type=minecraft:parrot,tag=zc_new_button,distance=..0.1,sort=nearest,limit=1] remove zc_new_button
 tp @s ~ -128 ~

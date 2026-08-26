@@ -1,12 +1,5 @@
-# height
-execute if score #filter_action zc_ctrl matches 1 run scoreboard players set #filter_height zc_ctrl -1
-execute if score #filter_action zc_ctrl matches 1 run scoreboard players set #filter_base zc_ctrl -1
-execute if score #filter_action zc_ctrl matches 1 run scoreboard players set #filter_plus zc_ctrl -1
-execute if score #filter_action zc_ctrl matches 1 run scoreboard players set #filter_tower zc_ctrl -1
-execute if score #filter_action zc_ctrl matches 1 run scoreboard players set #filter_spawn zc_ctrl 2
-execute if score #filter_action zc_ctrl matches 1 run scoreboard players set #filter_pickaxe zc_ctrl -1
-execute if score #filter_action zc_ctrl matches 1 run scoreboard players set #filter_location zc_ctrl -1
-execute if score #filter_action zc_ctrl matches 1 run scoreboard players set #filter_rotation zc_ctrl -1
+# reset
+execute if score #filter_action zc_ctrl matches 1 run function zeroboard:filter/defaults
 
 # location
 execute if score #filter_action zc_ctrl matches 2 run scoreboard players add #filter_location zc_ctrl 1

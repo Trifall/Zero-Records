@@ -1,9 +1,18 @@
-kill @e[type=ender_dragon]
+# the dragon is left alive: it flies down to the fountain and plays out the full
+# 10s ending death animation there. the finish is confirmed when that animation
+# starts, so its constant 200t tail is added up front instead of waited out -
+# the fallback (dragon gone before arriving) already lived through the tail.
+execute if entity @e[type=minecraft:ender_dragon,limit=1] run scoreboard players add timer timer 200
 scoreboard players set active timer 0
-# measures the death -> fountain tail instead of the old +199
+# keeps prediction/lock out of the post-confirm window; cleared when the next
+# kill saves its record
+scoreboard players set #finish_locked zc_ctrl 1
 execute unless score onecycle flags matches 1 run function zeroboard:records/finish
 
 function practice:timer/timer
-scoreboard players reset flying_to_fountain flags
+
+# flying_to_fountain deliberately stays set through the death animation so
+# health_display keeps fountain-flight mode (bossbar empty, pool untouched);
+# practice:reset clears it with the rest of the attempt
 
 execute if score timer settings matches 0 unless score onecycle flags matches 1 run tellraw @a [{"text":"\nFinal Time: "},{"nbt":"time_string","storage":"practice:timeparser","interpret":true,"color":"gold"}]

@@ -8,11 +8,11 @@ scoreboard players set #page_total_records zc_ctrl 0
 execute store result score #page_total_records zc_ctrl run data get storage zeroboard:records work.page_source
 scoreboard players operation #page_total zc_ctrl = #page_total_records zc_ctrl
 scoreboard players add #page_total zc_ctrl 4
-scoreboard players operation #page_total zc_ctrl /= #five zc_ctrl
+scoreboard players operation #page_total zc_ctrl /= #c5 zc_ctrl
 execute if score #page_total zc_ctrl matches ..0 run scoreboard players set #page_total zc_ctrl 1
 scoreboard players operation ZPages zc_ctrl = #page_total zc_ctrl
 scoreboard players operation #skip zc_ctrl = #page zc_ctrl
-scoreboard players operation #skip zc_ctrl *= #five zc_ctrl
+scoreboard players operation #skip zc_ctrl *= #c5 zc_ctrl
 function zeroboard:display/skip
 data modify storage zeroboard:records view set value []
 execute if data storage zeroboard:records work.page_source[0] run data modify storage zeroboard:records view append from storage zeroboard:records work.page_source[0]
@@ -47,40 +47,19 @@ execute unless data storage zeroboard:records view[0] run data merge entity @e[t
 
 tag @e[tag=zc_target_line1] remove zc_target_line1
 tag @e[tag=zc_target_line2] remove zc_target_line2
+data modify storage zeroboard:records work.rows set from storage zeroboard:records view
 tag @e[tag=zc_r0_line1,limit=1] add zc_target_line1
 tag @e[tag=zc_r0_line2,limit=1] add zc_target_line2
-data remove storage zeroboard:records work.render
-execute if data storage zeroboard:records view[0] run data modify storage zeroboard:records work.render set from storage zeroboard:records view[0]
-execute if data storage zeroboard:records view[0] run function zeroboard:display/record
-
-tag @e[tag=zc_target_line1] remove zc_target_line1
-tag @e[tag=zc_target_line2] remove zc_target_line2
+execute if data storage zeroboard:records work.rows[0] run function zeroboard:display/row
 tag @e[tag=zc_r1_line1,limit=1] add zc_target_line1
 tag @e[tag=zc_r1_line2,limit=1] add zc_target_line2
-data remove storage zeroboard:records work.render
-execute if data storage zeroboard:records view[1] run data modify storage zeroboard:records work.render set from storage zeroboard:records view[1]
-execute if data storage zeroboard:records view[1] run function zeroboard:display/record
-
-tag @e[tag=zc_target_line1] remove zc_target_line1
-tag @e[tag=zc_target_line2] remove zc_target_line2
+execute if data storage zeroboard:records work.rows[0] run function zeroboard:display/row
 tag @e[tag=zc_r2_line1,limit=1] add zc_target_line1
 tag @e[tag=zc_r2_line2,limit=1] add zc_target_line2
-data remove storage zeroboard:records work.render
-execute if data storage zeroboard:records view[2] run data modify storage zeroboard:records work.render set from storage zeroboard:records view[2]
-execute if data storage zeroboard:records view[2] run function zeroboard:display/record
-
-tag @e[tag=zc_target_line1] remove zc_target_line1
-tag @e[tag=zc_target_line2] remove zc_target_line2
+execute if data storage zeroboard:records work.rows[0] run function zeroboard:display/row
 tag @e[tag=zc_r3_line1,limit=1] add zc_target_line1
 tag @e[tag=zc_r3_line2,limit=1] add zc_target_line2
-data remove storage zeroboard:records work.render
-execute if data storage zeroboard:records view[3] run data modify storage zeroboard:records work.render set from storage zeroboard:records view[3]
-execute if data storage zeroboard:records view[3] run function zeroboard:display/record
-
-tag @e[tag=zc_target_line1] remove zc_target_line1
-tag @e[tag=zc_target_line2] remove zc_target_line2
+execute if data storage zeroboard:records work.rows[0] run function zeroboard:display/row
 tag @e[tag=zc_r4_line1,limit=1] add zc_target_line1
 tag @e[tag=zc_r4_line2,limit=1] add zc_target_line2
-data remove storage zeroboard:records work.render
-execute if data storage zeroboard:records view[4] run data modify storage zeroboard:records work.render set from storage zeroboard:records view[4]
-execute if data storage zeroboard:records view[4] run function zeroboard:display/record
+execute if data storage zeroboard:records work.rows[0] run function zeroboard:display/row

@@ -3,7 +3,8 @@ fill 96 52 -4 104 65 4 minecraft:air replace minecraft:end_stone
 setblock 100 42 0 minecraft:structure_block{posX:-22,posY:1,posZ:-15,mode:"LOAD"}
 
 # spawn list went 9 -> 19 entries. menu order is
-#   0 Random   1 Actually Random   2 Random Buried   3 Open   4 Overhang   5..18 Buried 52..65
+#   0 Natural Distribution   1 Uniformly Random   2 Random Buried
+#   3 Open   4 Overhang   5..18 Buried 52..65
 # but spawn_act keeps the base pack's numbering, so 3 and 4 are mapped back and the
 # buried entries are shifted down by 2 to land on spawn_act 3..16.
 scoreboard players operation spawn_act settings = spawn settings
@@ -11,7 +12,7 @@ execute if score spawn settings matches 3 run scoreboard players set spawn_act s
 execute if score spawn settings matches 4 run scoreboard players set spawn_act settings 1
 execute if score spawn settings matches 5..18 run scoreboard players remove spawn_act settings 2
 
-# random - weighted to match how often each spawn actually occurs in real seeds
+# natural distribution - weighted to match how often each spawn occurs in real seeds
 execute if score spawn settings matches 0 run scoreboard players set mod rng 10000
 execute if score spawn settings matches 0 run function practice:random/generate
 execute if score spawn settings matches 0 run scoreboard players operation #spawn_roll settings = r rng
@@ -27,7 +28,7 @@ execute if score spawn settings matches 0 if score #spawn_roll settings matches 
 execute if score spawn settings matches 0 if score #spawn_roll settings matches 2860..6429 run scoreboard players set spawn_act settings 0
 execute if score spawn settings matches 0 if score #spawn_roll settings matches 6430..9999 run scoreboard players set spawn_act settings 1
 
-# actually random - flat roll over every spawn, ignoring how common it is
+# uniformly random - flat roll over every spawn, ignoring how common it is
 execute if score spawn settings matches 1 run scoreboard players set mod rng 16
 execute if score spawn settings matches 1 run function practice:random/generate
 execute if score spawn settings matches 1 run scoreboard players operation spawn_act settings = r rng

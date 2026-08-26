@@ -1,0 +1,10 @@
+execute if score #node_ground zc_ctrl matches 57 run fill ~ 53 ~ ~ 57 ~ end_stone
+execute if score #node_ground zc_ctrl matches 58 run fill ~ 54 ~ ~ 58 ~ end_stone
+execute if score #node_ground zc_ctrl matches 59 run fill ~ 55 ~ ~ 59 ~ end_stone
+execute if score #node_ground zc_ctrl matches 60 run fill ~ 56 ~ ~ 60 ~ end_stone
+execute if score #node_ground zc_ctrl matches 61 run fill ~ 57 ~ ~ 61 ~ end_stone
+execute if score #node_ground zc_ctrl matches 62 run fill ~ 58 ~ ~ 62 ~ end_stone
+execute if score #node_ground zc_ctrl matches 63 run fill ~ 59 ~ ~ 63 ~ end_stone
+execute if score #node_ground zc_ctrl matches 64 run fill ~ 60 ~ ~ 64 ~ end_stone
+execute if score #node_ground zc_ctrl matches 65 run fill ~ 61 ~ ~ 65 ~ end_stone
+execute if score #node_ground zc_ctrl matches 66 run fill ~ 62 ~ ~ 66 ~ end_stone

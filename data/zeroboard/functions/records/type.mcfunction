@@ -1,79 +1,23 @@
+# "base" or "base+plus" off the table load sets up, anything past it is Other
 data modify storage zeroboard:records current.type set value "Other"
-execute if score explosives stats matches 0 if score plus_1 stats matches 0 run data modify storage zeroboard:records current.type set value "0"
-execute if score explosives stats matches 0 if score plus_1 stats matches 1 run data modify storage zeroboard:records current.type set value "0+1"
-execute if score explosives stats matches 0 if score plus_1 stats matches 2 run data modify storage zeroboard:records current.type set value "0+2"
-execute if score explosives stats matches 0 if score plus_1 stats matches 3 run data modify storage zeroboard:records current.type set value "0+3"
-execute if score explosives stats matches 0 if score plus_1 stats matches 4 run data modify storage zeroboard:records current.type set value "0+4"
-execute if score explosives stats matches 0 if score plus_1 stats matches 5 run data modify storage zeroboard:records current.type set value "0+5"
-execute if score explosives stats matches 1 if score plus_1 stats matches 0 run data modify storage zeroboard:records current.type set value "1"
-execute if score explosives stats matches 1 if score plus_1 stats matches 1 run data modify storage zeroboard:records current.type set value "1+1"
-execute if score explosives stats matches 1 if score plus_1 stats matches 2 run data modify storage zeroboard:records current.type set value "1+2"
-execute if score explosives stats matches 1 if score plus_1 stats matches 3 run data modify storage zeroboard:records current.type set value "1+3"
-execute if score explosives stats matches 1 if score plus_1 stats matches 4 run data modify storage zeroboard:records current.type set value "1+4"
-execute if score explosives stats matches 1 if score plus_1 stats matches 5 run data modify storage zeroboard:records current.type set value "1+5"
-execute if score explosives stats matches 2 if score plus_1 stats matches 0 run data modify storage zeroboard:records current.type set value "2"
-execute if score explosives stats matches 2 if score plus_1 stats matches 1 run data modify storage zeroboard:records current.type set value "2+1"
-execute if score explosives stats matches 2 if score plus_1 stats matches 2 run data modify storage zeroboard:records current.type set value "2+2"
-execute if score explosives stats matches 2 if score plus_1 stats matches 3 run data modify storage zeroboard:records current.type set value "2+3"
-execute if score explosives stats matches 2 if score plus_1 stats matches 4 run data modify storage zeroboard:records current.type set value "2+4"
-execute if score explosives stats matches 2 if score plus_1 stats matches 5 run data modify storage zeroboard:records current.type set value "2+5"
-execute if score explosives stats matches 3 if score plus_1 stats matches 0 run data modify storage zeroboard:records current.type set value "3"
-execute if score explosives stats matches 3 if score plus_1 stats matches 1 run data modify storage zeroboard:records current.type set value "3+1"
-execute if score explosives stats matches 3 if score plus_1 stats matches 2 run data modify storage zeroboard:records current.type set value "3+2"
-execute if score explosives stats matches 3 if score plus_1 stats matches 3 run data modify storage zeroboard:records current.type set value "3+3"
-execute if score explosives stats matches 3 if score plus_1 stats matches 4 run data modify storage zeroboard:records current.type set value "3+4"
-execute if score explosives stats matches 3 if score plus_1 stats matches 5 run data modify storage zeroboard:records current.type set value "3+5"
-execute if score explosives stats matches 4 if score plus_1 stats matches 0 run data modify storage zeroboard:records current.type set value "4"
-execute if score explosives stats matches 4 if score plus_1 stats matches 1 run data modify storage zeroboard:records current.type set value "4+1"
-execute if score explosives stats matches 4 if score plus_1 stats matches 2 run data modify storage zeroboard:records current.type set value "4+2"
-execute if score explosives stats matches 4 if score plus_1 stats matches 3 run data modify storage zeroboard:records current.type set value "4+3"
-execute if score explosives stats matches 4 if score plus_1 stats matches 4 run data modify storage zeroboard:records current.type set value "4+4"
-execute if score explosives stats matches 4 if score plus_1 stats matches 5 run data modify storage zeroboard:records current.type set value "4+5"
-execute if score explosives stats matches 5 if score plus_1 stats matches 0 run data modify storage zeroboard:records current.type set value "5"
-execute if score explosives stats matches 5 if score plus_1 stats matches 1 run data modify storage zeroboard:records current.type set value "5+1"
-execute if score explosives stats matches 5 if score plus_1 stats matches 2 run data modify storage zeroboard:records current.type set value "5+2"
-execute if score explosives stats matches 5 if score plus_1 stats matches 3 run data modify storage zeroboard:records current.type set value "5+3"
-execute if score explosives stats matches 5 if score plus_1 stats matches 4 run data modify storage zeroboard:records current.type set value "5+4"
-execute if score explosives stats matches 5 if score plus_1 stats matches 5 run data modify storage zeroboard:records current.type set value "5+5"
-execute if score explosives stats matches 6 if score plus_1 stats matches 0 run data modify storage zeroboard:records current.type set value "6"
-execute if score explosives stats matches 6 if score plus_1 stats matches 1 run data modify storage zeroboard:records current.type set value "6+1"
-execute if score explosives stats matches 6 if score plus_1 stats matches 2 run data modify storage zeroboard:records current.type set value "6+2"
-execute if score explosives stats matches 6 if score plus_1 stats matches 3 run data modify storage zeroboard:records current.type set value "6+3"
-execute if score explosives stats matches 6 if score plus_1 stats matches 4 run data modify storage zeroboard:records current.type set value "6+4"
-execute if score explosives stats matches 6 if score plus_1 stats matches 5 run data modify storage zeroboard:records current.type set value "6+5"
-execute if score explosives stats matches 7 if score plus_1 stats matches 0 run data modify storage zeroboard:records current.type set value "7"
-execute if score explosives stats matches 7 if score plus_1 stats matches 1 run data modify storage zeroboard:records current.type set value "7+1"
-execute if score explosives stats matches 7 if score plus_1 stats matches 2 run data modify storage zeroboard:records current.type set value "7+2"
-execute if score explosives stats matches 7 if score plus_1 stats matches 3 run data modify storage zeroboard:records current.type set value "7+3"
-execute if score explosives stats matches 7 if score plus_1 stats matches 4 run data modify storage zeroboard:records current.type set value "7+4"
-execute if score explosives stats matches 7 if score plus_1 stats matches 5 run data modify storage zeroboard:records current.type set value "7+5"
-execute if score explosives stats matches 8 if score plus_1 stats matches 0 run data modify storage zeroboard:records current.type set value "8"
-execute if score explosives stats matches 8 if score plus_1 stats matches 1 run data modify storage zeroboard:records current.type set value "8+1"
-execute if score explosives stats matches 8 if score plus_1 stats matches 2 run data modify storage zeroboard:records current.type set value "8+2"
-execute if score explosives stats matches 8 if score plus_1 stats matches 3 run data modify storage zeroboard:records current.type set value "8+3"
-execute if score explosives stats matches 8 if score plus_1 stats matches 4 run data modify storage zeroboard:records current.type set value "8+4"
-execute if score explosives stats matches 8 if score plus_1 stats matches 5 run data modify storage zeroboard:records current.type set value "8+5"
-execute if score explosives stats matches 9 if score plus_1 stats matches 0 run data modify storage zeroboard:records current.type set value "9"
-execute if score explosives stats matches 9 if score plus_1 stats matches 1 run data modify storage zeroboard:records current.type set value "9+1"
-execute if score explosives stats matches 9 if score plus_1 stats matches 2 run data modify storage zeroboard:records current.type set value "9+2"
-execute if score explosives stats matches 9 if score plus_1 stats matches 3 run data modify storage zeroboard:records current.type set value "9+3"
-execute if score explosives stats matches 9 if score plus_1 stats matches 4 run data modify storage zeroboard:records current.type set value "9+4"
-execute if score explosives stats matches 9 if score plus_1 stats matches 5 run data modify storage zeroboard:records current.type set value "9+5"
-execute if score explosives stats matches 10 if score plus_1 stats matches 0 run data modify storage zeroboard:records current.type set value "10"
-execute if score explosives stats matches 10 if score plus_1 stats matches 1 run data modify storage zeroboard:records current.type set value "10+1"
-execute if score explosives stats matches 10 if score plus_1 stats matches 2 run data modify storage zeroboard:records current.type set value "10+2"
-execute if score explosives stats matches 10 if score plus_1 stats matches 3 run data modify storage zeroboard:records current.type set value "10+3"
-execute if score explosives stats matches 10 if score plus_1 stats matches 4 run data modify storage zeroboard:records current.type set value "10+4"
-execute if score explosives stats matches 10 if score plus_1 stats matches 5 run data modify storage zeroboard:records current.type set value "10+5"
-execute if score explosives stats matches 11 if score plus_1 stats matches 0 run data modify storage zeroboard:records current.type set value "11"
-execute if score explosives stats matches 11 if score plus_1 stats matches 1 run data modify storage zeroboard:records current.type set value "11+1"
-execute if score explosives stats matches 11 if score plus_1 stats matches 2 run data modify storage zeroboard:records current.type set value "11+2"
-execute if score explosives stats matches 11 if score plus_1 stats matches 3 run data modify storage zeroboard:records current.type set value "11+3"
-execute if score explosives stats matches 11 if score plus_1 stats matches 4 run data modify storage zeroboard:records current.type set value "11+4"
-execute if score explosives stats matches 11 if score plus_1 stats matches 5 run data modify storage zeroboard:records current.type set value "11+5"
-execute if score explosives stats matches 12 if score plus_1 stats matches 0 run data modify storage zeroboard:records current.type set value "12"
-execute if score explosives stats matches 12 if score plus_1 stats matches 1 run data modify storage zeroboard:records current.type set value "12+1"
-execute if score explosives stats matches 12 if score plus_1 stats matches 2 run data modify storage zeroboard:records current.type set value "12+2"
-execute if score explosives stats matches 12 if score plus_1 stats matches 3 run data modify storage zeroboard:records current.type set value "12+3"
-execute if score explosives stats matches 12 if score plus_1 stats matches 4 run data modify storage zeroboard:records current.type set value "12+4"
-execute if score explosives stats matches 12 if score plus_1 stats matches 5 run data modify storage zeroboard:records current.type set value "12+5"
+data remove storage zeroboard:records work.type_row
+execute if score explosives stats matches 0 run data modify storage zeroboard:records work.type_row set from storage zeroboard:records types[0]
+execute if score explosives stats matches 1 run data modify storage zeroboard:records work.type_row set from storage zeroboard:records types[1]
+execute if score explosives stats matches 2 run data modify storage zeroboard:records work.type_row set from storage zeroboard:records types[2]
+execute if score explosives stats matches 3 run data modify storage zeroboard:records work.type_row set from storage zeroboard:records types[3]
+execute if score explosives stats matches 4 run data modify storage zeroboard:records work.type_row set from storage zeroboard:records types[4]
+execute if score explosives stats matches 5 run data modify storage zeroboard:records work.type_row set from storage zeroboard:records types[5]
+execute if score explosives stats matches 6 run data modify storage zeroboard:records work.type_row set from storage zeroboard:records types[6]
+execute if score explosives stats matches 7 run data modify storage zeroboard:records work.type_row set from storage zeroboard:records types[7]
+execute if score explosives stats matches 8 run data modify storage zeroboard:records work.type_row set from storage zeroboard:records types[8]
+execute if score explosives stats matches 9 run data modify storage zeroboard:records work.type_row set from storage zeroboard:records types[9]
+execute if score explosives stats matches 10 run data modify storage zeroboard:records work.type_row set from storage zeroboard:records types[10]
+execute if score explosives stats matches 11 run data modify storage zeroboard:records work.type_row set from storage zeroboard:records types[11]
+execute if score explosives stats matches 12 run data modify storage zeroboard:records work.type_row set from storage zeroboard:records types[12]
+execute if score plus_1 stats matches 0 if data storage zeroboard:records work.type_row run data modify storage zeroboard:records current.type set from storage zeroboard:records work.type_row[0]
+execute if score plus_1 stats matches 1 if data storage zeroboard:records work.type_row run data modify storage zeroboard:records current.type set from storage zeroboard:records work.type_row[1]
+execute if score plus_1 stats matches 2 if data storage zeroboard:records work.type_row run data modify storage zeroboard:records current.type set from storage zeroboard:records work.type_row[2]
+execute if score plus_1 stats matches 3 if data storage zeroboard:records work.type_row run data modify storage zeroboard:records current.type set from storage zeroboard:records work.type_row[3]
+execute if score plus_1 stats matches 4 if data storage zeroboard:records work.type_row run data modify storage zeroboard:records current.type set from storage zeroboard:records work.type_row[4]
+execute if score plus_1 stats matches 5 if data storage zeroboard:records work.type_row run data modify storage zeroboard:records current.type set from storage zeroboard:records work.type_row[5]
+data remove storage zeroboard:records work.type_row

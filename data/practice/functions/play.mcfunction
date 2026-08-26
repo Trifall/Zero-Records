@@ -1,3 +1,7 @@
+# clear any dragon left by the previous attempt before the new one. a completed
+# attempt keeps its full death animation until restart.
+function practice:cleanup_dragon
+
 # set location (front / back)
 scoreboard players operation location_act settings = location settings
 execute if score location settings matches 2 run scoreboard players set location_act settings 0
@@ -20,9 +24,12 @@ function practice:level/set_tower_order
 function practice:level/load_towers
 function practice:level/load_terrain
 function practice:nodes/force
+execute if score direction_act settings matches 1 if score one_eighth_fly settings matches 1..3 run function practice:level/one_eighth_always_fly_nodes
 
-# spawn dragon
-execute if score disable_dragon settings matches 0 run schedule function practice:spawn_dragon 1t
+# spawn dragon. Vanilla End Entry brings the player back first, then the dragon
+# a beat later like a freshly loaded End fight.
+execute if score disable_dragon settings matches 0 if score vanilla_entry settings matches 0 run schedule function practice:spawn_dragon 1t replace
+execute if score disable_dragon settings matches 0 if score vanilla_entry settings matches 1 run schedule function practice:spawn_dragon 12t replace
 
 # save loadout if still editing
 execute if score editing_loadout flags matches 1 run function practice:inventory/save_loadout
@@ -30,7 +37,9 @@ execute if score renaming flags matches 1 run function practice:inventory/rename
 
 # prepare player
 execute in minecraft:the_end run spawnpoint @a 135 65 0
-schedule function practice:tp_player 1t
+function practice:entry/start
+execute if score vanilla_entry settings matches 0 run schedule function practice:tp_player 1t replace
+execute if score vanilla_entry settings matches 1 run schedule function practice:tp_player 10t replace
 gamemode survival @a
 execute as @a run function practice:inventory/loadinv
 effect clear @a

@@ -1,3 +1,4 @@
+# one layer per fill: the whole slab is well over the 32768 block fill limit
 fill 102 111 80 -80 111 -80 air replace #practice:remove
 fill 102 112 80 -80 112 -80 air replace #practice:remove
 fill 102 113 80 -80 113 -80 air replace #practice:remove

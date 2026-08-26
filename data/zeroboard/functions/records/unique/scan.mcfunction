@@ -10,14 +10,7 @@ execute store result score #candidate_cover zc_ctrl run data get storage zeroboa
 execute store result score #candidate_buried zc_ctrl run data get storage zeroboard:records work.unique_current.buried
 execute store result score #candidate_pickaxe zc_ctrl run data get storage zeroboard:records work.unique_current.pickaxe_code
 scoreboard players set #candidate_approach zc_ctrl -1
-execute if data storage zeroboard:records work.unique_current{approach:"Front Diagonal CW"} run scoreboard players set #candidate_approach zc_ctrl 0
-execute if data storage zeroboard:records work.unique_current{approach:"Back Diagonal CW"} run scoreboard players set #candidate_approach zc_ctrl 1
-execute if data storage zeroboard:records work.unique_current{approach:"Front Straight CW"} run scoreboard players set #candidate_approach zc_ctrl 2
-execute if data storage zeroboard:records work.unique_current{approach:"Back Straight CW"} run scoreboard players set #candidate_approach zc_ctrl 3
-execute if data storage zeroboard:records work.unique_current{approach:"Front Diagonal CCW"} run scoreboard players set #candidate_approach zc_ctrl 4
-execute if data storage zeroboard:records work.unique_current{approach:"Back Diagonal CCW"} run scoreboard players set #candidate_approach zc_ctrl 5
-execute if data storage zeroboard:records work.unique_current{approach:"Front Straight CCW"} run scoreboard players set #candidate_approach zc_ctrl 6
-execute if data storage zeroboard:records work.unique_current{approach:"Back Straight CCW"} run scoreboard players set #candidate_approach zc_ctrl 7
+execute store result score #candidate_approach zc_ctrl run data get storage zeroboard:records work.unique_current.approach_code
 scoreboard players set #unique_match zc_ctrl 1
 execute unless score #candidate_tower zc_ctrl = #unique_tower zc_ctrl run scoreboard players set #unique_match zc_ctrl 0
 execute unless score #candidate_standing zc_ctrl = #unique_standing zc_ctrl run scoreboard players set #unique_match zc_ctrl 0

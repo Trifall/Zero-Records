@@ -1,5 +1,15 @@
 # rebuilds the settings entries this pack adds or extends, and carries forward
 # anything saved under an older menu layout. called from load.
+# base entries are edited in place (settings/extend), the pack's own are rebuilt from
+# a template with just the saved value kept (settings/install).
+
+# the in-place edits need one entry per index, see practice:gui/dedupe
+data modify storage practice:gui src set from storage practice:gui pages[1].entries
+function practice:gui/dedupe
+data modify storage practice:gui pages[1].entries set from storage practice:gui clean
+data modify storage practice:gui src set from storage practice:gui pages[1].defaults
+function practice:gui/dedupe
+data modify storage practice:gui pages[1].defaults set from storage practice:gui clean
 
 # spawn menu migrations.
 # the list has been renumbered twice as entries went in, so an old world still has the
@@ -15,146 +25,89 @@ scoreboard players set #buried_v3 zc_ctrl 1
 execute unless score #spawn_order_v4 zc_ctrl matches 1 run function zeroboard:settings/migrate/spawn_v4
 scoreboard players set #spawn_order_v4 zc_ctrl 1
 
-data modify storage practice:gui pages[1].entries[{tag:{index:4b}}].size set value 19
-data modify storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.LoreGray set value ['{"text":"Random","color":"gray","italic":"false"}','{"text":"Actually Random","color":"gray","italic":"false"}','{"text":"Random Buried","color":"gray","italic":"false"}','{"text":"Open","color":"gray","italic":"false"}','{"text":"Overhang","color":"gray","italic":"false"}','{"text":"Buried 52","color":"gray","italic":"false"}','{"text":"Buried 53","color":"gray","italic":"false"}','{"text":"Buried 54","color":"gray","italic":"false"}','{"text":"Buried 55","color":"gray","italic":"false"}','{"text":"Buried 56","color":"gray","italic":"false"}','{"text":"Buried 57","color":"gray","italic":"false"}','{"text":"Buried 58","color":"gray","italic":"false"}','{"text":"Buried 59","color":"gray","italic":"false"}','{"text":"Buried 60","color":"gray","italic":"false"}','{"text":"Buried 61","color":"gray","italic":"false"}','{"text":"Buried 62","color":"gray","italic":"false"}','{"text":"Buried 63","color":"gray","italic":"false"}','{"text":"Buried 64","color":"gray","italic":"false"}','{"text":"Buried 65","color":"gray","italic":"false"}']
-data modify storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.LoreColor set value ['{"text":"Random","color":"gold","italic":"false"}','{"text":"Actually Random","color":"gold","italic":"false"}','{"text":"Random Buried","color":"gold","italic":"false"}','{"text":"Open","color":"gold","italic":"false"}','{"text":"Overhang","color":"gold","italic":"false"}','{"text":"Buried 52","color":"gold","italic":"false"}','{"text":"Buried 53","color":"gold","italic":"false"}','{"text":"Buried 54","color":"gold","italic":"false"}','{"text":"Buried 55","color":"gold","italic":"false"}','{"text":"Buried 56","color":"gold","italic":"false"}','{"text":"Buried 57","color":"gold","italic":"false"}','{"text":"Buried 58","color":"gold","italic":"false"}','{"text":"Buried 59","color":"gold","italic":"false"}','{"text":"Buried 60","color":"gold","italic":"false"}','{"text":"Buried 61","color":"gold","italic":"false"}','{"text":"Buried 62","color":"gold","italic":"false"}','{"text":"Buried 63","color":"gold","italic":"false"}','{"text":"Buried 64","color":"gold","italic":"false"}','{"text":"Buried 65","color":"gold","italic":"false"}']
-data modify storage practice:gui pages[1].defaults[{tag:{index:4b}}].size set value 19
-data modify storage practice:gui pages[1].defaults[{tag:{index:4b}}].value set value 3b
-data modify storage practice:gui pages[1].defaults[{tag:{index:4b}}].tag.display.LoreGray set from storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.LoreGray
-data modify storage practice:gui pages[1].defaults[{tag:{index:4b}}].tag.display.LoreColor set from storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.LoreColor
-data modify storage practice:gui pages[1].defaults[{tag:{index:4b}}].tag.display.Lore set from storage practice:gui pages[1].defaults[{tag:{index:4b}}].tag.display.LoreGray
-data modify storage practice:gui pages[1].defaults[{tag:{index:4b}}].tag.display.Lore[0] set from storage practice:gui pages[1].defaults[{tag:{index:4b}}].tag.display.LoreColor[0]
+execute if data storage practice:gui pages[1].entries[{tag:{index:4b}}] if data storage practice:gui pages[1].defaults[{tag:{index:4b}}] run function zeroboard:settings/extend/spawn
+execute if data storage practice:gui pages[1].entries[{tag:{index:3b}}] if data storage practice:gui pages[1].defaults[{tag:{index:3b}}] run function zeroboard:settings/extend/saturation
+execute if data storage practice:gui pages[1].entries[{tag:{index:7b}}] if data storage practice:gui pages[1].defaults[{tag:{index:7b}}] run function zeroboard:settings/extend/rotation
 
-execute store result score #spawn_gui zc_ctrl run data get storage practice:gui pages[1].entries[{tag:{index:4b}}].value
-data modify storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.Lore set from storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.LoreGray
-execute if score #spawn_gui zc_ctrl matches 0 run data modify storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.Lore[0] set from storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.LoreColor[0]
-execute if score #spawn_gui zc_ctrl matches 1 run data modify storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.Lore[1] set from storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.LoreColor[1]
-execute if score #spawn_gui zc_ctrl matches 2 run data modify storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.Lore[2] set from storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.LoreColor[2]
-execute if score #spawn_gui zc_ctrl matches 3 run data modify storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.Lore[3] set from storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.LoreColor[3]
-execute if score #spawn_gui zc_ctrl matches 4 run data modify storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.Lore[4] set from storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.LoreColor[4]
-execute if score #spawn_gui zc_ctrl matches 5 run data modify storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.Lore[5] set from storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.LoreColor[5]
-execute if score #spawn_gui zc_ctrl matches 6 run data modify storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.Lore[6] set from storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.LoreColor[6]
-execute if score #spawn_gui zc_ctrl matches 7 run data modify storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.Lore[7] set from storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.LoreColor[7]
-execute if score #spawn_gui zc_ctrl matches 8 run data modify storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.Lore[8] set from storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.LoreColor[8]
-execute if score #spawn_gui zc_ctrl matches 9 run data modify storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.Lore[9] set from storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.LoreColor[9]
-execute if score #spawn_gui zc_ctrl matches 10 run data modify storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.Lore[10] set from storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.LoreColor[10]
-execute if score #spawn_gui zc_ctrl matches 11 run data modify storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.Lore[11] set from storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.LoreColor[11]
-execute if score #spawn_gui zc_ctrl matches 12 run data modify storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.Lore[12] set from storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.LoreColor[12]
-execute if score #spawn_gui zc_ctrl matches 13 run data modify storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.Lore[13] set from storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.LoreColor[13]
-execute if score #spawn_gui zc_ctrl matches 14 run data modify storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.Lore[14] set from storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.LoreColor[14]
-execute if score #spawn_gui zc_ctrl matches 15 run data modify storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.Lore[15] set from storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.LoreColor[15]
-execute if score #spawn_gui zc_ctrl matches 16 run data modify storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.Lore[16] set from storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.LoreColor[16]
-execute if score #spawn_gui zc_ctrl matches 17 run data modify storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.Lore[17] set from storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.LoreColor[17]
-execute if score #spawn_gui zc_ctrl matches 18 run data modify storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.Lore[18] set from storage practice:gui pages[1].entries[{tag:{index:4b}}].tag.display.LoreColor[18]
+# the base pack fills the top row's spare cells (slots 3-8) with panes. the pack's own
+# controls go there instead, and index 18 (Death Skip) was retired
+data remove storage practice:gui pages[1].entries[{Slot:3b,tag:{index:-1b}}]
+data remove storage practice:gui pages[1].entries[{Slot:4b,tag:{index:-1b}}]
+data remove storage practice:gui pages[1].entries[{Slot:5b,tag:{index:-1b}}]
+data remove storage practice:gui pages[1].entries[{Slot:6b,tag:{index:-1b}}]
+data remove storage practice:gui pages[1].entries[{Slot:7b,tag:{index:-1b}}]
+data remove storage practice:gui pages[1].entries[{Slot:8b,tag:{index:-1b}}]
+data remove storage practice:gui pages[1].defaults[{Slot:3b,tag:{index:-1b}}]
+data remove storage practice:gui pages[1].defaults[{Slot:4b,tag:{index:-1b}}]
+data remove storage practice:gui pages[1].defaults[{Slot:5b,tag:{index:-1b}}]
+data remove storage practice:gui pages[1].defaults[{Slot:6b,tag:{index:-1b}}]
+data remove storage practice:gui pages[1].defaults[{Slot:7b,tag:{index:-1b}}]
+data remove storage practice:gui pages[1].defaults[{Slot:8b,tag:{index:-1b}}]
+data remove storage practice:gui pages[1].entries[{tag:{index:18b}}]
+data remove storage practice:gui pages[1].defaults[{tag:{index:18b}}]
+scoreboard players reset death_skip settings
+scoreboard players reset #death_skip_entry zc_ctrl
+scoreboard players reset #death_skip_default zc_ctrl
 
-scoreboard players set #sat_entry zc_ctrl 0
-scoreboard players set #sat_default zc_ctrl 0
-scoreboard players set #sat_entry_old zc_ctrl 0
-scoreboard players set #sat_default_old zc_ctrl 0
-scoreboard players set #sat_legacy_entry zc_ctrl 0
-scoreboard players set #sat_legacy_default zc_ctrl 0
-scoreboard players set #sat_v1_entry zc_ctrl 0
-scoreboard players set #sat_v1_default zc_ctrl 0
-execute store result score #sat_entry zc_ctrl run data get storage practice:gui pages[1].entries[{tag:{index:3b}}].value
-execute store result score #sat_default zc_ctrl run data get storage practice:gui pages[1].defaults[{tag:{index:3b}}].value
-scoreboard players operation #sat_entry_old zc_ctrl = #sat_entry zc_ctrl
-scoreboard players operation #sat_default_old zc_ctrl = #sat_default zc_ctrl
-execute if data storage practice:gui pages[1].entries[{tag:{index:3b},size:7}] run scoreboard players set #sat_legacy_entry zc_ctrl 1
-execute if data storage practice:gui pages[1].defaults[{tag:{index:3b},size:7}] run scoreboard players set #sat_legacy_default zc_ctrl 1
-execute if data storage practice:gui pages[1].entries[{tag:{index:3b},size:12}] run scoreboard players set #sat_v1_entry zc_ctrl 1
-execute if data storage practice:gui pages[1].defaults[{tag:{index:3b},size:12}] run scoreboard players set #sat_v1_default zc_ctrl 1
-execute if score #sat_legacy_entry zc_ctrl matches 1 if score #sat_entry_old zc_ctrl matches 1 run scoreboard players set #sat_entry zc_ctrl 2
-execute if score #sat_legacy_entry zc_ctrl matches 1 if score #sat_entry_old zc_ctrl matches 2 run scoreboard players set #sat_entry zc_ctrl 4
-execute if score #sat_legacy_entry zc_ctrl matches 1 if score #sat_entry_old zc_ctrl matches 3 run scoreboard players set #sat_entry zc_ctrl 6
-execute if score #sat_legacy_entry zc_ctrl matches 1 if score #sat_entry_old zc_ctrl matches 4 run scoreboard players set #sat_entry zc_ctrl 8
-execute if score #sat_legacy_entry zc_ctrl matches 1 if score #sat_entry_old zc_ctrl matches 5 run scoreboard players set #sat_entry zc_ctrl 10
-execute if score #sat_legacy_entry zc_ctrl matches 1 if score #sat_entry_old zc_ctrl matches 6 run scoreboard players set #sat_entry zc_ctrl 21
-execute if score #sat_legacy_default zc_ctrl matches 1 if score #sat_default_old zc_ctrl matches 1 run scoreboard players set #sat_default zc_ctrl 2
-execute if score #sat_legacy_default zc_ctrl matches 1 if score #sat_default_old zc_ctrl matches 2 run scoreboard players set #sat_default zc_ctrl 4
-execute if score #sat_legacy_default zc_ctrl matches 1 if score #sat_default_old zc_ctrl matches 3 run scoreboard players set #sat_default zc_ctrl 6
-execute if score #sat_legacy_default zc_ctrl matches 1 if score #sat_default_old zc_ctrl matches 4 run scoreboard players set #sat_default zc_ctrl 8
-execute if score #sat_legacy_default zc_ctrl matches 1 if score #sat_default_old zc_ctrl matches 5 run scoreboard players set #sat_default zc_ctrl 10
-execute if score #sat_legacy_default zc_ctrl matches 1 if score #sat_default_old zc_ctrl matches 6 run scoreboard players set #sat_default zc_ctrl 21
-execute if score #sat_v1_entry zc_ctrl matches 1 if score #sat_entry_old zc_ctrl matches 11 run scoreboard players set #sat_entry zc_ctrl 21
-execute if score #sat_v1_default zc_ctrl matches 1 if score #sat_default_old zc_ctrl matches 11 run scoreboard players set #sat_default zc_ctrl 21
-execute unless score #sat_entry zc_ctrl matches 0..21 run scoreboard players set #sat_entry zc_ctrl 4
-execute unless score #sat_default zc_ctrl matches 0..21 run scoreboard players set #sat_default zc_ctrl 21
+# Fly Chance
+scoreboard players set #tmpl_value zc_ctrl -1
+scoreboard players set #tmpl_default zc_ctrl -1
+execute store result score #tmpl_value zc_ctrl run data get storage practice:gui pages[1].entries[{tag:{index:14b}}].value
+execute store result score #tmpl_default zc_ctrl run data get storage practice:gui pages[1].defaults[{tag:{index:14b}}].value
+execute unless score #fly_order_v2 zc_ctrl matches 1 run function zeroboard:settings/migrate/fly_v2
+scoreboard players set #fly_order_v2 zc_ctrl 1
+data remove storage practice:gui pages[1].entries[{tag:{index:14b}}]
+data remove storage practice:gui pages[1].defaults[{tag:{index:14b}}]
+data modify storage practice:gui tmpl set value {Slot:3b,id:"minecraft:end_rod",Count:2b,size:5,value:2b,tag:{index:14b,display:{Name:'{"text":"Fly Chance","italic":"false","color":"dark_aqua"}',LoreGray:['{"text":"Ranked","color":"gray","italic":"false"}','{"text":"Vanilla","color":"gray","italic":"false"}','{"text":"No","color":"gray","italic":"false"}','{"text":"Always Fly (Y95)","color":"gray","italic":"false"}','{"text":"Custom","color":"gray","italic":"false"}'],LoreColor:['{"text":"Ranked","color":"gold","italic":"false"}','{"text":"Vanilla","color":"gold","italic":"false"}','{"text":"No","color":"gold","italic":"false"}','{"text":"Always Fly (Y95)","color":"gold","italic":"false"}','{"text":"Custom","color":"gold","italic":"false"}']}}}
+function zeroboard:settings/install
+scoreboard players operation fly_chance settings = #tmpl_value zc_ctrl
 
-data modify storage practice:gui pages[1].entries[{tag:{index:3b}}].size set value 22
-data modify storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.LoreGray set value ['{"text":"None","color":"gray","italic":"false"}','{"text":"1 Point","color":"gray","italic":"false"}','{"text":"2 Points","color":"gray","italic":"false"}','{"text":"3 Points","color":"gray","italic":"false"}','{"text":"4 Points","color":"gray","italic":"false"}','{"text":"5 Points","color":"gray","italic":"false"}','{"text":"6 Points","color":"gray","italic":"false"}','{"text":"7 Points","color":"gray","italic":"false"}','{"text":"8 Points","color":"gray","italic":"false"}','{"text":"9 Points","color":"gray","italic":"false"}','{"text":"10 Points","color":"gray","italic":"false"}','{"text":"11 Points","color":"gray","italic":"false"}','{"text":"12 Points","color":"gray","italic":"false"}','{"text":"13 Points","color":"gray","italic":"false"}','{"text":"14 Points","color":"gray","italic":"false"}','{"text":"15 Points","color":"gray","italic":"false"}','{"text":"16 Points","color":"gray","italic":"false"}','{"text":"17 Points","color":"gray","italic":"false"}','{"text":"18 Points","color":"gray","italic":"false"}','{"text":"19 Points","color":"gray","italic":"false"}','{"text":"20 Points","color":"gray","italic":"false"}','{"text":"Max","color":"gray","italic":"false"}']
-data modify storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.LoreColor set value ['{"text":"None","color":"gold","italic":"false"}','{"text":"1 Point","color":"gold","italic":"false"}','{"text":"2 Points","color":"gold","italic":"false"}','{"text":"3 Points","color":"gold","italic":"false"}','{"text":"4 Points","color":"gold","italic":"false"}','{"text":"5 Points","color":"gold","italic":"false"}','{"text":"6 Points","color":"gold","italic":"false"}','{"text":"7 Points","color":"gold","italic":"false"}','{"text":"8 Points","color":"gold","italic":"false"}','{"text":"9 Points","color":"gold","italic":"false"}','{"text":"10 Points","color":"gold","italic":"false"}','{"text":"11 Points","color":"gold","italic":"false"}','{"text":"12 Points","color":"gold","italic":"false"}','{"text":"13 Points","color":"gold","italic":"false"}','{"text":"14 Points","color":"gold","italic":"false"}','{"text":"15 Points","color":"gold","italic":"false"}','{"text":"16 Points","color":"gold","italic":"false"}','{"text":"17 Points","color":"gold","italic":"false"}','{"text":"18 Points","color":"gold","italic":"false"}','{"text":"19 Points","color":"gold","italic":"false"}','{"text":"20 Points","color":"gold","italic":"false"}','{"text":"Max","color":"gold","italic":"false"}']
-data modify storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.Lore set from storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.LoreGray
-execute store result storage practice:gui pages[1].entries[{tag:{index:3b}}].value byte 1 run scoreboard players get #sat_entry zc_ctrl
-execute if score #sat_entry zc_ctrl matches 0 run data modify storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.Lore[0] set from storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.LoreColor[0]
-execute if score #sat_entry zc_ctrl matches 1 run data modify storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.Lore[1] set from storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.LoreColor[1]
-execute if score #sat_entry zc_ctrl matches 2 run data modify storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.Lore[2] set from storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.LoreColor[2]
-execute if score #sat_entry zc_ctrl matches 3 run data modify storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.Lore[3] set from storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.LoreColor[3]
-execute if score #sat_entry zc_ctrl matches 4 run data modify storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.Lore[4] set from storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.LoreColor[4]
-execute if score #sat_entry zc_ctrl matches 5 run data modify storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.Lore[5] set from storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.LoreColor[5]
-execute if score #sat_entry zc_ctrl matches 6 run data modify storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.Lore[6] set from storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.LoreColor[6]
-execute if score #sat_entry zc_ctrl matches 7 run data modify storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.Lore[7] set from storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.LoreColor[7]
-execute if score #sat_entry zc_ctrl matches 8 run data modify storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.Lore[8] set from storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.LoreColor[8]
-execute if score #sat_entry zc_ctrl matches 9 run data modify storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.Lore[9] set from storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.LoreColor[9]
-execute if score #sat_entry zc_ctrl matches 10 run data modify storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.Lore[10] set from storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.LoreColor[10]
-execute if score #sat_entry zc_ctrl matches 11 run data modify storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.Lore[11] set from storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.LoreColor[11]
-execute if score #sat_entry zc_ctrl matches 12 run data modify storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.Lore[12] set from storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.LoreColor[12]
-execute if score #sat_entry zc_ctrl matches 13 run data modify storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.Lore[13] set from storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.LoreColor[13]
-execute if score #sat_entry zc_ctrl matches 14 run data modify storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.Lore[14] set from storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.LoreColor[14]
-execute if score #sat_entry zc_ctrl matches 15 run data modify storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.Lore[15] set from storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.LoreColor[15]
-execute if score #sat_entry zc_ctrl matches 16 run data modify storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.Lore[16] set from storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.LoreColor[16]
-execute if score #sat_entry zc_ctrl matches 17 run data modify storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.Lore[17] set from storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.LoreColor[17]
-execute if score #sat_entry zc_ctrl matches 18 run data modify storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.Lore[18] set from storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.LoreColor[18]
-execute if score #sat_entry zc_ctrl matches 19 run data modify storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.Lore[19] set from storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.LoreColor[19]
-execute if score #sat_entry zc_ctrl matches 20 run data modify storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.Lore[20] set from storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.LoreColor[20]
-execute if score #sat_entry zc_ctrl matches 21 run data modify storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.Lore[21] set from storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.LoreColor[21]
-data modify storage practice:gui pages[1].defaults[{tag:{index:3b}}].size set value 22
-data modify storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.LoreGray set from storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.LoreGray
-data modify storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.LoreColor set from storage practice:gui pages[1].entries[{tag:{index:3b}}].tag.display.LoreColor
-data modify storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.Lore set from storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.LoreGray
-execute store result storage practice:gui pages[1].defaults[{tag:{index:3b}}].value byte 1 run scoreboard players get #sat_default zc_ctrl
-execute if score #sat_default zc_ctrl matches 0 run data modify storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.Lore[0] set from storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.LoreColor[0]
-execute if score #sat_default zc_ctrl matches 1 run data modify storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.Lore[1] set from storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.LoreColor[1]
-execute if score #sat_default zc_ctrl matches 2 run data modify storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.Lore[2] set from storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.LoreColor[2]
-execute if score #sat_default zc_ctrl matches 3 run data modify storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.Lore[3] set from storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.LoreColor[3]
-execute if score #sat_default zc_ctrl matches 4 run data modify storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.Lore[4] set from storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.LoreColor[4]
-execute if score #sat_default zc_ctrl matches 5 run data modify storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.Lore[5] set from storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.LoreColor[5]
-execute if score #sat_default zc_ctrl matches 6 run data modify storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.Lore[6] set from storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.LoreColor[6]
-execute if score #sat_default zc_ctrl matches 7 run data modify storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.Lore[7] set from storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.LoreColor[7]
-execute if score #sat_default zc_ctrl matches 8 run data modify storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.Lore[8] set from storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.LoreColor[8]
-execute if score #sat_default zc_ctrl matches 9 run data modify storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.Lore[9] set from storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.LoreColor[9]
-execute if score #sat_default zc_ctrl matches 10 run data modify storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.Lore[10] set from storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.LoreColor[10]
-execute if score #sat_default zc_ctrl matches 11 run data modify storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.Lore[11] set from storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.LoreColor[11]
-execute if score #sat_default zc_ctrl matches 12 run data modify storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.Lore[12] set from storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.LoreColor[12]
-execute if score #sat_default zc_ctrl matches 13 run data modify storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.Lore[13] set from storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.LoreColor[13]
-execute if score #sat_default zc_ctrl matches 14 run data modify storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.Lore[14] set from storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.LoreColor[14]
-execute if score #sat_default zc_ctrl matches 15 run data modify storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.Lore[15] set from storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.LoreColor[15]
-execute if score #sat_default zc_ctrl matches 16 run data modify storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.Lore[16] set from storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.LoreColor[16]
-execute if score #sat_default zc_ctrl matches 17 run data modify storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.Lore[17] set from storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.LoreColor[17]
-execute if score #sat_default zc_ctrl matches 18 run data modify storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.Lore[18] set from storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.LoreColor[18]
-execute if score #sat_default zc_ctrl matches 19 run data modify storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.Lore[19] set from storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.LoreColor[19]
-execute if score #sat_default zc_ctrl matches 20 run data modify storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.Lore[20] set from storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.LoreColor[20]
-execute if score #sat_default zc_ctrl matches 21 run data modify storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.Lore[21] set from storage practice:gui pages[1].defaults[{tag:{index:3b}}].tag.display.LoreColor[21]
-scoreboard players operation saturation settings = #sat_entry zc_ctrl
+# On Crystal Break
+scoreboard players set #tmpl_value zc_ctrl -1
+scoreboard players set #tmpl_default zc_ctrl -1
+execute store result score #tmpl_value zc_ctrl run data get storage practice:gui pages[1].entries[{tag:{index:15b}}].value
+execute store result score #tmpl_default zc_ctrl run data get storage practice:gui pages[1].defaults[{tag:{index:15b}}].value
+data remove storage practice:gui pages[1].entries[{tag:{index:15b}}]
+data remove storage practice:gui pages[1].defaults[{tag:{index:15b}}]
+data modify storage practice:gui tmpl set value {Slot:4b,id:"minecraft:end_crystal",Count:2b,size:3,value:1b,tag:{index:15b,display:{Name:'{"text":"On Crystal Break","italic":"false","color":"dark_aqua"}',LoreGray:['{"text":"No Fly","color":"gray","italic":"false"}','{"text":"Always Fly","color":"gray","italic":"false"}','{"text":"Vanilla","color":"gray","italic":"false"}'],LoreColor:['{"text":"No Fly","color":"gold","italic":"false"}','{"text":"Always Fly","color":"gold","italic":"false"}','{"text":"Vanilla","color":"gold","italic":"false"}']}}}
+function zeroboard:settings/install
+scoreboard players operation crystal_break settings = #tmpl_value zc_ctrl
 
-data modify storage practice:gui pages[1].entries[{tag:{index:7b}}].size set value 8
-data modify storage practice:gui pages[1].entries[{tag:{index:7b}}].tag.display.LoreGray set value ['{"text":"CW","color":"gray","italic":"false"}','{"text":"CCW","color":"gray","italic":"false"}','{"text":"Random","color":"gray","italic":"false"}','{"text":"Custom","color":"gray","italic":"false"}','{"text":"Fast CW","color":"gray","italic":"false"}','{"text":"Fast CCW","color":"gray","italic":"false"}','{"text":"Slow CW","color":"gray","italic":"false"}','{"text":"Slow CCW","color":"gray","italic":"false"}']
-data modify storage practice:gui pages[1].entries[{tag:{index:7b}}].tag.display.LoreColor set value ['{"text":"CW","color":"gold","italic":"false"}','{"text":"CCW","color":"gold","italic":"false"}','{"text":"Random","color":"gold","italic":"false"}','{"text":"Custom","color":"gold","italic":"false"}','{"text":"Fast CW","color":"gold","italic":"false"}','{"text":"Fast CCW","color":"gold","italic":"false"}','{"text":"Slow CW","color":"gold","italic":"false"}','{"text":"Slow CCW","color":"gold","italic":"false"}']
-data modify storage practice:gui pages[1].entries[{tag:{index:7b}}].tag.display.Lore set from storage practice:gui pages[1].entries[{tag:{index:7b}}].tag.display.LoreGray
-execute if data storage practice:gui pages[1].entries[{tag:{index:7b},value:0b}] run data modify storage practice:gui pages[1].entries[{tag:{index:7b}}].tag.display.Lore[0] set from storage practice:gui pages[1].entries[{tag:{index:7b}}].tag.display.LoreColor[0]
-execute if data storage practice:gui pages[1].entries[{tag:{index:7b},value:1b}] run data modify storage practice:gui pages[1].entries[{tag:{index:7b}}].tag.display.Lore[1] set from storage practice:gui pages[1].entries[{tag:{index:7b}}].tag.display.LoreColor[1]
-execute if data storage practice:gui pages[1].entries[{tag:{index:7b},value:2b}] run data modify storage practice:gui pages[1].entries[{tag:{index:7b}}].tag.display.Lore[2] set from storage practice:gui pages[1].entries[{tag:{index:7b}}].tag.display.LoreColor[2]
-execute if data storage practice:gui pages[1].entries[{tag:{index:7b},value:3b}] run data modify storage practice:gui pages[1].entries[{tag:{index:7b}}].tag.display.Lore[3] set from storage practice:gui pages[1].entries[{tag:{index:7b}}].tag.display.LoreColor[3]
-execute if data storage practice:gui pages[1].entries[{tag:{index:7b},value:4b}] run data modify storage practice:gui pages[1].entries[{tag:{index:7b}}].tag.display.Lore[4] set from storage practice:gui pages[1].entries[{tag:{index:7b}}].tag.display.LoreColor[4]
-execute if data storage practice:gui pages[1].entries[{tag:{index:7b},value:5b}] run data modify storage practice:gui pages[1].entries[{tag:{index:7b}}].tag.display.Lore[5] set from storage practice:gui pages[1].entries[{tag:{index:7b}}].tag.display.LoreColor[5]
-execute if data storage practice:gui pages[1].entries[{tag:{index:7b},value:6b}] run data modify storage practice:gui pages[1].entries[{tag:{index:7b}}].tag.display.Lore[6] set from storage practice:gui pages[1].entries[{tag:{index:7b}}].tag.display.LoreColor[6]
-execute if data storage practice:gui pages[1].entries[{tag:{index:7b},value:7b}] run data modify storage practice:gui pages[1].entries[{tag:{index:7b}}].tag.display.Lore[7] set from storage practice:gui pages[1].entries[{tag:{index:7b}}].tag.display.LoreColor[7]
-data modify storage practice:gui pages[1].defaults[{tag:{index:7b}}].size set value 8
-data modify storage practice:gui pages[1].defaults[{tag:{index:7b}}].tag.display.LoreGray set value ['{"text":"CW","color":"gray","italic":"false"}','{"text":"CCW","color":"gray","italic":"false"}','{"text":"Random","color":"gray","italic":"false"}','{"text":"Custom","color":"gray","italic":"false"}','{"text":"Fast CW","color":"gray","italic":"false"}','{"text":"Fast CCW","color":"gray","italic":"false"}','{"text":"Slow CW","color":"gray","italic":"false"}','{"text":"Slow CCW","color":"gray","italic":"false"}']
-data modify storage practice:gui pages[1].defaults[{tag:{index:7b}}].tag.display.LoreColor set value ['{"text":"CW","color":"gold","italic":"false"}','{"text":"CCW","color":"gold","italic":"false"}','{"text":"Random","color":"gold","italic":"false"}','{"text":"Custom","color":"gold","italic":"false"}','{"text":"Fast CW","color":"gold","italic":"false"}','{"text":"Fast CCW","color":"gold","italic":"false"}','{"text":"Slow CW","color":"gold","italic":"false"}','{"text":"Slow CCW","color":"gold","italic":"false"}']
-data modify storage practice:gui pages[1].defaults[{tag:{index:7b}}].tag.display.Lore set value ['{"text":"CW","color":"gray","italic":"false"}','{"text":"CCW","color":"gray","italic":"false"}','{"text":"Random","color":"gold","italic":"false"}','{"text":"Custom","color":"gray","italic":"false"}','{"text":"Fast CW","color":"gray","italic":"false"}','{"text":"Fast CCW","color":"gray","italic":"false"}','{"text":"Slow CW","color":"gray","italic":"false"}','{"text":"Slow CCW","color":"gray","italic":"false"}']
+# Fireball Chance
+scoreboard players set #tmpl_value zc_ctrl -1
+scoreboard players set #tmpl_default zc_ctrl -1
+execute store result score #tmpl_value zc_ctrl run data get storage practice:gui pages[1].entries[{tag:{index:16b}}].value
+execute store result score #tmpl_default zc_ctrl run data get storage practice:gui pages[1].defaults[{tag:{index:16b}}].value
+data remove storage practice:gui pages[1].entries[{tag:{index:16b}}]
+data remove storage practice:gui pages[1].defaults[{tag:{index:16b}}]
+data modify storage practice:gui tmpl set value {Slot:5b,id:"minecraft:fire_charge",Count:1b,size:2,value:0b,tag:{index:16b,display:{Name:'{"text":"Fireball Chance","italic":"false","color":"dark_aqua"}',LoreGray:['{"text":"Reduced","color":"gray","italic":"false"}','{"text":"Vanilla","color":"gray","italic":"false"}'],LoreColor:['{"text":"Reduced","color":"gold","italic":"false"}','{"text":"Vanilla","color":"gold","italic":"false"}']}}}
+function zeroboard:settings/install
+scoreboard players operation fireball_chance settings = #tmpl_value zc_ctrl
 
-# settings with more than two choices use a 2 item stack. left click empties the slot,
-# right click leaves one behind, which practice:gui/click_event reads as the direction
+# 1/8 Always Fly
+scoreboard players set #tmpl_value zc_ctrl -1
+scoreboard players set #tmpl_default zc_ctrl -1
+execute store result score #tmpl_value zc_ctrl run data get storage practice:gui pages[1].entries[{tag:{index:17b}}].value
+execute store result score #tmpl_default zc_ctrl run data get storage practice:gui pages[1].defaults[{tag:{index:17b}}].value
+data remove storage practice:gui pages[1].entries[{tag:{index:17b}}]
+data remove storage practice:gui pages[1].defaults[{tag:{index:17b}}]
+data modify storage practice:gui tmpl set value {Slot:6b,id:"minecraft:feather",Count:2b,size:4,value:0b,tag:{index:17b,display:{Name:'{"text":"1/8 Always Fly","italic":"false","color":"dark_aqua"}',LoreGray:['{"text":"Off","color":"gray","italic":"false"}','{"text":"Y92","color":"gray","italic":"false"}','{"text":"Y97","color":"gray","italic":"false"}','{"text":"Custom","color":"gray","italic":"false"}'],LoreColor:['{"text":"Off","color":"gold","italic":"false"}','{"text":"Y92","color":"gold","italic":"false"}','{"text":"Y97","color":"gold","italic":"false"}','{"text":"Custom","color":"gold","italic":"false"}']}}}
+function zeroboard:settings/install
+scoreboard players operation one_eighth_fly settings = #tmpl_value zc_ctrl
+
+# Vanilla End Entry
+scoreboard players set #tmpl_value zc_ctrl -1
+scoreboard players set #tmpl_default zc_ctrl -1
+execute store result score #tmpl_value zc_ctrl run data get storage practice:gui pages[1].entries[{tag:{index:19b}}].value
+execute store result score #tmpl_default zc_ctrl run data get storage practice:gui pages[1].defaults[{tag:{index:19b}}].value
+data remove storage practice:gui pages[1].entries[{tag:{index:19b}}]
+data remove storage practice:gui pages[1].defaults[{tag:{index:19b}}]
+data modify storage practice:gui tmpl set value {Slot:7b,id:"minecraft:end_portal_frame",Count:1b,size:2,value:0b,tag:{index:19b,display:{Name:'{"text":"Vanilla End Entry","italic":"false","color":"dark_aqua"}',LoreGray:['{"text":"Off","color":"gray","italic":"false"}','{"text":"Dimension Load + Dragon Delay","color":"gray","italic":"false"}'],LoreColor:['{"text":"Off","color":"gold","italic":"false"}','{"text":"Dimension Load + Dragon Delay","color":"gold","italic":"false"}']}}}
+function zeroboard:settings/install
+scoreboard players operation vanilla_entry settings = #tmpl_value zc_ctrl
+
+# base settings with more than two choices use a 2 item stack. left click empties the
+# slot, right click leaves one behind, which practice:gui/click_event reads as the direction
 data modify storage practice:gui pages[1].entries[{tag:{index:0b}}].Count set value 2b
 data modify storage practice:gui pages[1].entries[{tag:{index:1b}}].Count set value 2b
 data modify storage practice:gui pages[1].entries[{tag:{index:3b}}].Count set value 2b

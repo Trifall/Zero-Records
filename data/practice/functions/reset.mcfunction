@@ -1,9 +1,23 @@
 # a reset abandons the run - flush the prediction before the markers go
 execute if score #prediction_active zc_ctrl matches 1 in minecraft:the_end run function zeroboard:prediction/force_finish
+schedule clear practice:tp_player
+schedule clear practice:spawn_dragon
+schedule clear practice:level/refill_nodes
+# a reset can land inside the node-probe window (2t, or 13t with Vanilla Entry),
+# and the schedule clear above would strand those terrain edits - a dug-out
+# Ranked column or a leftover barrier then skews every later run's node heights.
+# refill_nodes covers all four fly modes and is safe to repeat.
+function practice:level/refill_nodes
 
-kill @e[type=#practice:remove]
+# clear the leftover dragon; the kill below handles everything else the attempt left
+function practice:cleanup_dragon
+# #practice:remove includes ender_dragon; cleanup_dragon owns dragon removal, so
+# keep it out of this kill
+kill @e[type=#practice:remove,type=!minecraft:ender_dragon]
 
 # player
+execute in minecraft:overworld run fill 495 249 495 505 249 505 minecraft:air replace minecraft:barrier
+execute in minecraft:overworld run forceload remove 495 495 505 505
 execute in minecraft:the_end run tp @a 135 65 0 90 0
 execute if score onecycle flags matches 1 in minecraft:the_end run tp @a 135 65 0 90 -20
 clear @a
@@ -29,8 +43,10 @@ scoreboard players reset * pearl
 scoreboard players set in_lobby flags 1
 scoreboard players reset onecycle flags
 scoreboard players reset flying_to_fountain flags
+scoreboard players set #vanilla_entry_pending zc_ctrl 0
 
 bossbar set minecraft:dragon visible false
+bossbar set minecraft:dragon players
 advancement revoke @a only minecraft:end/kill_dragon
 
 tellraw @a {"text":""}

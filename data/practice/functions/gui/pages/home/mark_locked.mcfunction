@@ -1,0 +1,10 @@
+execute if data storage practice:gui locks[{tag:{index:0b}}] if data storage practice:gui mark[{tag:{index:0b}}] run data modify storage practice:gui mark[{tag:{index:0b}}].locked set value 1b
+execute if data storage practice:gui locks[{tag:{index:1b}}] if data storage practice:gui mark[{tag:{index:1b}}] run data modify storage practice:gui mark[{tag:{index:1b}}].locked set value 1b
+execute if data storage practice:gui locks[{tag:{index:2b}}] if data storage practice:gui mark[{tag:{index:2b}}] run data modify storage practice:gui mark[{tag:{index:2b}}].locked set value 1b
+execute if data storage practice:gui locks[{tag:{index:3b}}] if data storage practice:gui mark[{tag:{index:3b}}] run data modify storage practice:gui mark[{tag:{index:3b}}].locked set value 1b
+execute if data storage practice:gui locks[{tag:{index:4b}}] if data storage practice:gui mark[{tag:{index:4b}}] run data modify storage practice:gui mark[{tag:{index:4b}}].locked set value 1b
+execute if data storage practice:gui locks[{tag:{index:5b}}] if data storage practice:gui mark[{tag:{index:5b}}] run data modify storage practice:gui mark[{tag:{index:5b}}].locked set value 1b
+execute if data storage practice:gui locks[{tag:{index:6b}}] if data storage practice:gui mark[{tag:{index:6b}}] run data modify storage practice:gui mark[{tag:{index:6b}}].locked set value 1b
+execute if data storage practice:gui locks[{tag:{index:7b}}] if data storage practice:gui mark[{tag:{index:7b}}] run data modify storage practice:gui mark[{tag:{index:7b}}].locked set value 1b
+execute if data storage practice:gui locks[{tag:{index:8b}}] if data storage practice:gui mark[{tag:{index:8b}}] run data modify storage practice:gui mark[{tag:{index:8b}}].locked set value 1b
+execute if data storage practice:gui locks[{tag:{index:9b}}] if data storage practice:gui mark[{tag:{index:9b}}] run data modify storage practice:gui mark[{tag:{index:9b}}].locked set value 1b

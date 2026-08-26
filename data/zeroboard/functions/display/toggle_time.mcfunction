@@ -1,5 +1,5 @@
 scoreboard players add #time_mode zc_ctrl 1
-scoreboard players operation #time_mode zc_ctrl %= #two zc_ctrl
+scoreboard players operation #time_mode zc_ctrl %= #c2 zc_ctrl
 scoreboard players set #unique_dirty zc_ctrl 1
 function zeroboard:display/render
 function zeroboard:menu/clean

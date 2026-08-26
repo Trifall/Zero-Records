@@ -1,35 +1,13 @@
-execute store result score value gui run data get storage practice:gui pages[1].entries[{active:1b}].value
-execute store result score size gui run data get storage practice:gui pages[1].entries[{active:1b}].size
+data modify storage practice:gui hl set from storage practice:gui pages[1].entries[{active:1b}]
+execute store result score value gui run data get storage practice:gui hl.value
+execute store result score size gui run data get storage practice:gui hl.size
 
 scoreboard players add value gui 1
 execute if score #reverse gui matches 1 run scoreboard players remove value gui 2
 execute if score value gui matches ..-1 run scoreboard players operation value gui += size gui
 scoreboard players operation value gui %= size gui
 
-execute store result storage practice:gui pages[1].entries[{active:1b}].value byte 1 run scoreboard players get value gui
-
-data modify storage practice:gui pages[1].entries[{active:1b}].tag.display.Lore set from storage practice:gui pages[1].entries[{active:1b}].tag.display.LoreGray
-
-execute if score value gui matches 0 run data modify storage practice:gui pages[1].entries[{active:1b}].tag.display.Lore[0] set from storage practice:gui pages[1].entries[{active:1b}].tag.display.LoreColor[0]
-execute if score value gui matches 1 run data modify storage practice:gui pages[1].entries[{active:1b}].tag.display.Lore[1] set from storage practice:gui pages[1].entries[{active:1b}].tag.display.LoreColor[1]
-execute if score value gui matches 2 run data modify storage practice:gui pages[1].entries[{active:1b}].tag.display.Lore[2] set from storage practice:gui pages[1].entries[{active:1b}].tag.display.LoreColor[2]
-execute if score value gui matches 3 run data modify storage practice:gui pages[1].entries[{active:1b}].tag.display.Lore[3] set from storage practice:gui pages[1].entries[{active:1b}].tag.display.LoreColor[3]
-execute if score value gui matches 4 run data modify storage practice:gui pages[1].entries[{active:1b}].tag.display.Lore[4] set from storage practice:gui pages[1].entries[{active:1b}].tag.display.LoreColor[4]
-execute if score value gui matches 5 run data modify storage practice:gui pages[1].entries[{active:1b}].tag.display.Lore[5] set from storage practice:gui pages[1].entries[{active:1b}].tag.display.LoreColor[5]
-execute if score value gui matches 6 run data modify storage practice:gui pages[1].entries[{active:1b}].tag.display.Lore[6] set from storage practice:gui pages[1].entries[{active:1b}].tag.display.LoreColor[6]
-execute if score value gui matches 7 run data modify storage practice:gui pages[1].entries[{active:1b}].tag.display.Lore[7] set from storage practice:gui pages[1].entries[{active:1b}].tag.display.LoreColor[7]
-execute if score value gui matches 8 run data modify storage practice:gui pages[1].entries[{active:1b}].tag.display.Lore[8] set from storage practice:gui pages[1].entries[{active:1b}].tag.display.LoreColor[8]
-# 9..18 - extended spawn list
-execute if score value gui matches 9 run data modify storage practice:gui pages[1].entries[{active:1b}].tag.display.Lore[9] set from storage practice:gui pages[1].entries[{active:1b}].tag.display.LoreColor[9]
-execute if score value gui matches 10 run data modify storage practice:gui pages[1].entries[{active:1b}].tag.display.Lore[10] set from storage practice:gui pages[1].entries[{active:1b}].tag.display.LoreColor[10]
-execute if score value gui matches 11 run data modify storage practice:gui pages[1].entries[{active:1b}].tag.display.Lore[11] set from storage practice:gui pages[1].entries[{active:1b}].tag.display.LoreColor[11]
-execute if score value gui matches 12 run data modify storage practice:gui pages[1].entries[{active:1b}].tag.display.Lore[12] set from storage practice:gui pages[1].entries[{active:1b}].tag.display.LoreColor[12]
-execute if score value gui matches 13 run data modify storage practice:gui pages[1].entries[{active:1b}].tag.display.Lore[13] set from storage practice:gui pages[1].entries[{active:1b}].tag.display.LoreColor[13]
-execute if score value gui matches 14 run data modify storage practice:gui pages[1].entries[{active:1b}].tag.display.Lore[14] set from storage practice:gui pages[1].entries[{active:1b}].tag.display.LoreColor[14]
-execute if score value gui matches 15 run data modify storage practice:gui pages[1].entries[{active:1b}].tag.display.Lore[15] set from storage practice:gui pages[1].entries[{active:1b}].tag.display.LoreColor[15]
-execute if score value gui matches 16 run data modify storage practice:gui pages[1].entries[{active:1b}].tag.display.Lore[16] set from storage practice:gui pages[1].entries[{active:1b}].tag.display.LoreColor[16]
-execute if score value gui matches 17 run data modify storage practice:gui pages[1].entries[{active:1b}].tag.display.Lore[17] set from storage practice:gui pages[1].entries[{active:1b}].tag.display.LoreColor[17]
-execute if score value gui matches 18 run data modify storage practice:gui pages[1].entries[{active:1b}].tag.display.Lore[18] set from storage practice:gui pages[1].entries[{active:1b}].tag.display.LoreColor[18]
-execute if score value gui matches 19 run data modify storage practice:gui pages[1].entries[{active:1b}].tag.display.Lore[19] set from storage practice:gui pages[1].entries[{active:1b}].tag.display.LoreColor[19]
-execute if score value gui matches 20 run data modify storage practice:gui pages[1].entries[{active:1b}].tag.display.Lore[20] set from storage practice:gui pages[1].entries[{active:1b}].tag.display.LoreColor[20]
-execute if score value gui matches 21 run data modify storage practice:gui pages[1].entries[{active:1b}].tag.display.Lore[21] set from storage practice:gui pages[1].entries[{active:1b}].tag.display.LoreColor[21]
+execute store result storage practice:gui hl.value byte 1 run scoreboard players get value gui
+scoreboard players operation #hl_value zc_ctrl = value gui
+function practice:gui/highlight
+data modify storage practice:gui pages[1].entries[{active:1b}] set from storage practice:gui hl

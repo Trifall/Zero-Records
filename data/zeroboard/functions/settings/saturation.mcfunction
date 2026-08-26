@@ -3,17 +3,9 @@ execute if score saturation settings matches 21 run scoreboard players set setpo
 scoreboard players operation diff saturation = setpoint saturation
 scoreboard players operation diff saturation -= player saturation
 
-scoreboard players set #odd_saturation zc_ctrl 0
-execute if score diff saturation matches 1 run scoreboard players set #odd_saturation zc_ctrl 1
-execute if score diff saturation matches 3 run scoreboard players set #odd_saturation zc_ctrl 1
-execute if score diff saturation matches 5 run scoreboard players set #odd_saturation zc_ctrl 1
-execute if score diff saturation matches 7 run scoreboard players set #odd_saturation zc_ctrl 1
-execute if score diff saturation matches 9 run scoreboard players set #odd_saturation zc_ctrl 1
-execute if score diff saturation matches 11 run scoreboard players set #odd_saturation zc_ctrl 1
-execute if score diff saturation matches 13 run scoreboard players set #odd_saturation zc_ctrl 1
-execute if score diff saturation matches 15 run scoreboard players set #odd_saturation zc_ctrl 1
-execute if score diff saturation matches 17 run scoreboard players set #odd_saturation zc_ctrl 1
-execute if score diff saturation matches 19 run scoreboard players set #odd_saturation zc_ctrl 1
+# an odd deficit needs a one tick hunger nudge on top, see clear_hunger
+scoreboard players operation #odd_saturation zc_ctrl = diff saturation
+scoreboard players operation #odd_saturation zc_ctrl %= #c2 zc_ctrl
 
 execute if score diff saturation matches 1..2 run effect give @a minecraft:saturation 1 0
 execute if score diff saturation matches 3..4 run effect give @a minecraft:saturation 1 1

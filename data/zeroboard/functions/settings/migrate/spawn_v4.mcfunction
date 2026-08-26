@@ -1,5 +1,6 @@
 # v3 -> v4. the two random options moved from the end of the list to the front:
-#   0 Random  1 Actually Random  2 Random Buried  3 Open  4 Overhang  5.. buried
+#   0 Natural Distribution  1 Uniformly Random  2 Random Buried
+#   3 Open  4 Overhang  5.. buried
 # old 17 / 18 were the random pair, old 0 / 1 were Open and Overhang.
 
 execute store result score #old_spawn zc_ctrl run data get storage practice:gui pages[1].entries[{tag:{index:4b}}].value

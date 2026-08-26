@@ -1,5 +1,5 @@
 scoreboard players add #unique_mode zc_ctrl 1
-scoreboard players operation #unique_mode zc_ctrl %= #two zc_ctrl
+scoreboard players operation #unique_mode zc_ctrl %= #c2 zc_ctrl
 scoreboard players set #unique_dirty zc_ctrl 1
 scoreboard players set #page zc_ctrl 0
 function zeroboard:display/render

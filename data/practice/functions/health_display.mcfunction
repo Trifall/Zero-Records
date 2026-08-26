@@ -5,6 +5,7 @@ scoreboard players operation last health = current health
 scoreboard players set #live_fight zc_ctrl 0
 execute unless score onecycle flags matches 1 unless score flying_to_fountain flags matches 1 unless score in_lobby flags matches 1 run scoreboard players set #live_fight zc_ctrl 1
 execute if score #live_fight zc_ctrl matches 1 if entity @e[type=minecraft:ender_dragon,limit=1] run function zeroboard:health/sample
+execute if score #live_fight zc_ctrl matches 1 if entity @e[type=minecraft:ender_dragon,limit=1] run function zeroboard:health/perch_damage
 execute if score onecycle flags matches 1 store result score current health run data get entity @e[type=minecraft:ender_dragon,limit=1] Health
 execute if score flying_to_fountain flags matches 1 store result score current health run data get entity @e[type=minecraft:ender_dragon,limit=1] Health
 

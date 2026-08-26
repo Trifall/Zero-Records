@@ -1,0 +1,17 @@
+# saturation, None / 1..20 points / Max
+function zeroboard:settings/migrate/saturation
+
+data modify storage practice:gui hl set from storage practice:gui pages[1].entries[{tag:{index:3b}}]
+data modify storage practice:gui hl.size set value 22
+data modify storage practice:gui hl.tag.display.LoreGray set value ['{"text":"None","color":"gray","italic":"false"}','{"text":"1 Point","color":"gray","italic":"false"}','{"text":"2 Points","color":"gray","italic":"false"}','{"text":"3 Points","color":"gray","italic":"false"}','{"text":"4 Points","color":"gray","italic":"false"}','{"text":"5 Points","color":"gray","italic":"false"}','{"text":"6 Points","color":"gray","italic":"false"}','{"text":"7 Points","color":"gray","italic":"false"}','{"text":"8 Points","color":"gray","italic":"false"}','{"text":"9 Points","color":"gray","italic":"false"}','{"text":"10 Points","color":"gray","italic":"false"}','{"text":"11 Points","color":"gray","italic":"false"}','{"text":"12 Points","color":"gray","italic":"false"}','{"text":"13 Points","color":"gray","italic":"false"}','{"text":"14 Points","color":"gray","italic":"false"}','{"text":"15 Points","color":"gray","italic":"false"}','{"text":"16 Points","color":"gray","italic":"false"}','{"text":"17 Points","color":"gray","italic":"false"}','{"text":"18 Points","color":"gray","italic":"false"}','{"text":"19 Points","color":"gray","italic":"false"}','{"text":"20 Points","color":"gray","italic":"false"}','{"text":"Max","color":"gray","italic":"false"}']
+data modify storage practice:gui hl.tag.display.LoreColor set value ['{"text":"None","color":"gold","italic":"false"}','{"text":"1 Point","color":"gold","italic":"false"}','{"text":"2 Points","color":"gold","italic":"false"}','{"text":"3 Points","color":"gold","italic":"false"}','{"text":"4 Points","color":"gold","italic":"false"}','{"text":"5 Points","color":"gold","italic":"false"}','{"text":"6 Points","color":"gold","italic":"false"}','{"text":"7 Points","color":"gold","italic":"false"}','{"text":"8 Points","color":"gold","italic":"false"}','{"text":"9 Points","color":"gold","italic":"false"}','{"text":"10 Points","color":"gold","italic":"false"}','{"text":"11 Points","color":"gold","italic":"false"}','{"text":"12 Points","color":"gold","italic":"false"}','{"text":"13 Points","color":"gold","italic":"false"}','{"text":"14 Points","color":"gold","italic":"false"}','{"text":"15 Points","color":"gold","italic":"false"}','{"text":"16 Points","color":"gold","italic":"false"}','{"text":"17 Points","color":"gold","italic":"false"}','{"text":"18 Points","color":"gold","italic":"false"}','{"text":"19 Points","color":"gold","italic":"false"}','{"text":"20 Points","color":"gold","italic":"false"}','{"text":"Max","color":"gold","italic":"false"}']
+execute store result storage practice:gui hl.value byte 1 run scoreboard players get #sat_entry zc_ctrl
+scoreboard players operation #hl_value zc_ctrl = #sat_entry zc_ctrl
+function practice:gui/highlight
+data modify storage practice:gui pages[1].entries[{tag:{index:3b}}] set from storage practice:gui hl
+
+execute store result storage practice:gui hl.value byte 1 run scoreboard players get #sat_default zc_ctrl
+scoreboard players operation #hl_value zc_ctrl = #sat_default zc_ctrl
+function practice:gui/highlight
+data modify storage practice:gui pages[1].defaults[{tag:{index:3b}}] set from storage practice:gui hl
+scoreboard players operation saturation settings = #sat_entry zc_ctrl

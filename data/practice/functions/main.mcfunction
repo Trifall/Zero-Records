@@ -15,6 +15,7 @@ execute if score in_lobby flags matches 1 run function practice:gui/main
 # crystals
 execute store result score phase stats run data get entity @e[type=ender_dragon,limit=1] DragonPhase
 execute if score in_lobby flags matches 0 run function practice:check_crystals
+function practice:fireball_chance
 
 # dragon health and knockback
 function practice:health_display
@@ -25,8 +26,13 @@ execute if score phase stats matches 0 if score onecycle flags matches 1 run sco
 execute if score phase stats matches 9 if score diff health matches 1.. run function practice:dragon_killed
 # freeze the prediction before the dragon entity despawns
 execute unless score onecycle flags matches 1 if score flying_to_fountain flags matches 1 if score phase stats matches 9 if score current health matches ..0 unless score #finish_locked zc_ctrl matches 1 run function zeroboard:prediction/lock
-# wait for the entity to be gone, not phase 0 - phase 0 drifts between runs
-execute if score flying_to_fountain flags matches 1 unless entity @e[type=minecraft:ender_dragon,limit=1] run function practice:finish
+# confirm the finish when the dying dragon reaches the fountain - that is where the
+# 10s ending death animation starts, and the same 10-block arrival the flydown
+# predictor uses. the flydown before it stays untouched. active==1 makes both
+# triggers single-fire, and stays clear of prediction/lock's #finish_locked.
+execute if score flying_to_fountain flags matches 1 if score active timer matches 1 if score phase stats matches 9 positioned 0.5 65 0.5 if entity @e[type=minecraft:ender_dragon,distance=..10] run function practice:finish
+# fallback - dragon gone before arriving (whacked mid flight, diverged)
+execute if score flying_to_fountain flags matches 1 if score active timer matches 1 unless entity @e[type=minecraft:ender_dragon,limit=1] run function practice:finish
 
 # saturation
 execute as @a store result score player saturation run data get entity @s foodSaturationLevel
@@ -48,7 +54,7 @@ execute if score show_nodes settings matches 0 if score in_lobby flags matches 0
 execute if score show_nodes settings matches 1 in the_end run function practice:nodes/show_all
 
 # player in overworld fix (probably unnecessary since v1.2)
-execute in minecraft:overworld positioned 0 0 0 as @a[distance=0..] in minecraft:the_end run tp @s 135 65 0 90 0
+execute unless score #vanilla_entry_pending zc_ctrl matches 1 in minecraft:overworld positioned 0 0 0 as @a[distance=0..] in minecraft:the_end run tp @s 135 65 0 90 0
 
 # repair lobby
 scoreboard players enable @a repair

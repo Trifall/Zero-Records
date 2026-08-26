@@ -29,4 +29,4 @@ summon minecraft:armor_stand 0 250 0 {Tags:["zc_dragon_sim","zc_dragon_sim_neck"
 summon minecraft:armor_stand 0 250 0 {Tags:["zc_dragon_sim","zc_dragon_sim_body"],Invisible:1b,Marker:1b,NoGravity:1b}
 summon minecraft:armor_stand 0 250 0 {Tags:["zc_dragon_sim","zc_dragon_sim_probe"],Invisible:1b,Marker:1b,NoGravity:1b}
 summon minecraft:armor_stand 0.5 65 0.5 {Tags:["zc_dragon_sim","zc_dragon_sim_target"],Invisible:1b,Marker:1b,NoGravity:1b}
-function zeroboard:prediction/collision/update
+execute as @e[type=minecraft:armor_stand,tag=zc_dragon_sim_pos,limit=1] run function zeroboard:prediction/collision/update

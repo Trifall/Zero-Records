@@ -1,0 +1,33 @@
+{
+  "values": [
+    "minecraft:obsidian",
+    "minecraft:lime_stained_glass_pane",
+    "minecraft:red_stained_glass_pane",
+    "minecraft:writable_book",
+    "minecraft:nether_star",
+    "minecraft:compass",
+    "minecraft:arrow",
+    "minecraft:diamond_sword",
+    "minecraft:apple",
+    "minecraft:end_stone",
+    "minecraft:lime_concrete",
+    "minecraft:red_concrete",
+    "minecraft:tnt",
+    "minecraft:clock",
+    "minecraft:ender_pearl",
+    "minecraft:chest",
+    "minecraft:crossbow",
+    "minecraft:ender_eye",
+    "minecraft:end_crystal",
+    "minecraft:end_rod",
+    "minecraft:target",
+    "minecraft:potion",
+    "minecraft:dragon_head",
+    "minecraft:fire_charge",
+    "minecraft:bedrock",
+    "minecraft:feather",
+    "minecraft:dragon_breath",
+    "minecraft:end_portal_frame",
+    "minecraft:barrier"
+  ]
+}

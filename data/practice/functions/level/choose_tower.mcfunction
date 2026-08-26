@@ -1,7 +1,8 @@
 # three towers now, not one - center plus both neighbours, each from its own pool
 
 # center tower
-function practice:level/copy_enabled_towers_center
+data modify storage practice:gui pool_src set from storage practice:gui tower_pages.center
+function practice:level/copy_enabled_towers
 scoreboard players set tower_pool_mode settings 0
 function practice:level/choose_tower_pool
 scoreboard players operation tower_center settings = tower_pick settings
@@ -9,13 +10,15 @@ scoreboard players operation tower settings = tower_pick settings
 data modify storage practice:towers active set from storage practice:towers picked_name
 
 # left neighbour
-function practice:level/copy_enabled_towers_left
+data modify storage practice:gui pool_src set from storage practice:gui tower_pages.left
+function practice:level/copy_enabled_towers
 scoreboard players set tower_pool_mode settings 1
 function practice:level/choose_tower_pool
 scoreboard players operation tower_left settings = tower_pick settings
 
 # right neighbour
-function practice:level/copy_enabled_towers_right
+data modify storage practice:gui pool_src set from storage practice:gui tower_pages.right
+function practice:level/copy_enabled_towers
 scoreboard players set tower_pool_mode settings 2
 function practice:level/choose_tower_pool
 scoreboard players operation tower_right settings = tower_pick settings

@@ -8,5 +8,3 @@ scoreboard players set #filter_location zc_ctrl -1
 scoreboard players set #filter_rotation zc_ctrl -1
 scoreboard players set #page zc_ctrl 0
 scoreboard players set #filter_init zc_ctrl 1
-scoreboard players set #five zc_ctrl 5
-scoreboard players set #sixty zc_ctrl 60
