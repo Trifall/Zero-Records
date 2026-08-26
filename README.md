@@ -1,6 +1,6 @@
 # Zero Records
 
-A Minecraft Java Edition datapack (1.16.x) that extends [Zero Practice v1.2.2 by Mescht](https://www.planetminecraft.com/data/zero-practice/) — an End crystal PvP / zero-cycle dragon fight practice pack — with kill record keeping, dragon flight prediction, and expanded settings.
+A Minecraft Java Edition datapack (1.16.x) that extends [Zero Practice v1.2.2 by Mescht]([https://github.com/Mescht/Zero-Practice]) — a zero-cycle dragon fight practice pack — with kill record keeping, dragon flight prediction, and expanded settings.
 
 ## Features
 
