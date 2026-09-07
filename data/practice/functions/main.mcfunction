@@ -13,6 +13,9 @@ execute if score in_lobby flags matches 0 run function practice:timer/timer
 execute if score in_lobby flags matches 1 run function practice:gui/main
 
 # crystals
+# undo always_fly's one-tick dip before anything below samples the dragon
+execute if score #af_dip100 zc_ctrl matches 1.. if entity @e[type=minecraft:ender_dragon,limit=1] run function practice:crystal_break/always_fly_restore
+scoreboard players set #af_dip100 zc_ctrl 0
 execute store result score phase stats run data get entity @e[type=ender_dragon,limit=1] DragonPhase
 execute if score in_lobby flags matches 0 run function practice:check_crystals
 function practice:fireball_chance
@@ -26,12 +29,16 @@ execute if score phase stats matches 0 if score onecycle flags matches 1 run sco
 execute if score phase stats matches 9 if score diff health matches 1.. run function practice:dragon_killed
 # freeze the prediction before the dragon entity despawns
 execute unless score onecycle flags matches 1 if score flying_to_fountain flags matches 1 if score phase stats matches 9 if score current health matches ..0 unless score #finish_locked zc_ctrl matches 1 run function zeroboard:prediction/lock
-# confirm the finish when the dying dragon reaches the fountain - that is where the
-# 10s ending death animation starts, and the same 10-block arrival the flydown
-# predictor uses. the flydown before it stays untouched. active==1 makes both
-# triggers single-fire, and stays clear of prediction/lock's #finish_locked.
-execute if score flying_to_fountain flags matches 1 if score active timer matches 1 if score phase stats matches 9 positioned 0.5 65 0.5 if entity @e[type=minecraft:ender_dragon,distance=..10] run function practice:finish
-# fallback - dragon gone before arriving (whacked mid flight, diverged)
+# confirm the finish the tick the 10s ending death animation starts. vanilla zeroes
+# the dragon's Health there (fountain arrival, or a block hit mid flight) and
+# selectors stop seeing it - only its parts are left, and those carry no
+# DragonPhase, so phase stats reads 0. that is the tell the base map's finish
+# keyed on; a 10-block fountain check missed collision deaths and only caught up
+# when the entity despawned 200t later. the flydown before it stays untouched.
+# active==1 makes both triggers single-fire, and stays clear of prediction/lock's
+# #finish_locked - lock runs first on the same tick.
+execute if score flying_to_fountain flags matches 1 if score active timer matches 1 if score phase stats matches 0 run function practice:finish
+# fallback - dragon gone outright (onecycle pins phase stats to 9 once it is)
 execute if score flying_to_fountain flags matches 1 if score active timer matches 1 unless entity @e[type=minecraft:ender_dragon,limit=1] run function practice:finish
 
 # saturation

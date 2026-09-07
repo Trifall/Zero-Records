@@ -11,11 +11,18 @@ execute if score crystals stats < crystals_last stats run scoreboard players ope
 # No Fly restores the pre-break phase - phase 0 is Holding (flying), so forcing 0
 # would not mean no fly. see crystal_break/no_fly
 execute if score crystals stats < crystals_last stats if score crystal_break settings matches 0 run function practice:crystal_break/no_fly
-execute if score crystals stats < crystals_last stats if score crystal_break settings matches 1 in minecraft:the_end run data modify entity @e[type=minecraft:ender_dragon,limit=1] DragonPhase set value 10b
-execute if score crystals stats < crystals_last stats if score crystal_break settings matches 1 run scoreboard players set #force_crystal_fly zc_ctrl 1
-execute if score crystals stats < crystals_last stats if score crystal_break settings matches 1 run schedule function practice:crystal_break/force_fly 1t replace
-execute if score crystals stats < crystals_last stats if score crystal_break settings matches 1 run tellraw @a[tag=debug] {"text":"[DEBUG] Crystal break queued a fresh flight path","color":"dark_purple"}
-execute if score crystals stats < crystals_last stats if score crystal_break settings matches 1 run scoreboard players set phase stats 10
+# Always Fly: leave the node the dragon is circling for the next one along the ring.
+# a phase write alone cannot do that - Holding rebuilds its path from the closest
+# cached node, and up at Y115+ that is the Y126 side selector at (+-40,0), so the
+# first path just replays. crystal_break/always_fly dips the dragon for the one
+# entity tick that builds the path. scheduled into the level tick so this tick's
+# tracker sample stays real; main undoes the dip next tick ahead of the tracker.
+# a perch keeps vanilla's own takeoff
+execute if score crystals stats < crystals_last stats if score crystal_break settings matches 1 if score phase stats matches 5..7 in minecraft:the_end run data modify entity @e[type=minecraft:ender_dragon,limit=1] DragonPhase set value 4b
+execute if score crystals stats < crystals_last stats if score crystal_break settings matches 1 if score phase stats matches 5..7 run scoreboard players set phase stats 4
+execute if score crystals stats < crystals_last stats if score crystal_break settings matches 1 if score phase stats matches 5..7 run tellraw @a[tag=debug] {"text":"[DEBUG] Crystal break forced a takeoff","color":"dark_purple"}
+execute if score crystals stats < crystals_last stats if score crystal_break settings matches 1 unless score phase stats matches 5..7 unless score phase stats matches 9 run schedule function practice:crystal_break/always_fly 1t replace
+execute if score crystals stats < crystals_last stats if score crystal_break settings matches 1 unless score phase stats matches 5..7 unless score phase stats matches 9 run tellraw @a[tag=debug] {"text":"[DEBUG] Crystal break queued the next node","color":"dark_purple"}
 execute if score crystals stats < crystals_last stats if score crystal_break settings matches 2 run tellraw @a[tag=debug] {"text":"[DEBUG] Crystal break left Vanilla behavior unchanged","color":"dark_purple"}
 
 # damage from crystal

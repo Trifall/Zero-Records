@@ -18,6 +18,7 @@ kill @e[type=#practice:remove,type=!minecraft:ender_dragon]
 # player
 execute in minecraft:overworld run fill 495 249 495 505 249 505 minecraft:air replace minecraft:barrier
 execute in minecraft:overworld run forceload remove 495 495 505 505
+execute in minecraft:the_end run forceload remove -80 -80 80 80
 execute in minecraft:the_end run tp @a 135 65 0 90 0
 execute if score onecycle flags matches 1 in minecraft:the_end run tp @a 135 65 0 90 -20
 clear @a
