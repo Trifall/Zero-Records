@@ -2,21 +2,17 @@
 # attempt keeps its full death animation until restart.
 function practice:cleanup_dragon
 
-# set location (front / back)
 scoreboard players operation location_act settings = location settings
 execute if score location settings matches 2 run scoreboard players set location_act settings 0
 execute if score location settings matches 2 if predicate practice:rand_50 run scoreboard players set location_act settings 1
 
-# set direction (digaonal / straight)
 scoreboard players operation direction_act settings = direction settings
 execute if score direction settings matches 2 run scoreboard players set direction_act settings 0
 execute if score direction settings matches 2 if predicate practice:rand_12.5 run scoreboard players set direction_act settings 1
 
-# set rotation (cw / ccw)
-# six variants now (cw/ccw x normal/fast/slow), lookup resolved in the same place
+# resolve cw/ccw and the normal/fast/slow lookup together.
 function zeroboard:settings/angles
 
-# load level
 function practice:level/load_fountain
 function practice:level/load_spawn
 function practice:level/choose_tower
@@ -31,11 +27,9 @@ execute if score direction_act settings matches 1 if score one_eighth_fly settin
 execute if score disable_dragon settings matches 0 if score vanilla_entry settings matches 0 run schedule function practice:spawn_dragon 1t replace
 execute if score disable_dragon settings matches 0 if score vanilla_entry settings matches 1 run schedule function practice:spawn_dragon 12t replace
 
-# save loadout if still editing
 execute if score editing_loadout flags matches 1 run function practice:inventory/save_loadout
 execute if score renaming flags matches 1 run function practice:inventory/rename/renamed
 
-# prepare player
 execute in minecraft:the_end run spawnpoint @a 135 65 0
 function practice:entry/start
 execute if score vanilla_entry settings matches 0 run schedule function practice:tp_player 1t replace
@@ -49,7 +43,6 @@ execute if score randomize settings matches 0 run loot give @a loot practice:jun
 clear @a glass_pane
 execute if score fireres settings matches 0 run effect give @a minecraft:fire_resistance 10000 0
 
-# reset scores
 scoreboard players set timer timer 0
 scoreboard players set active timer 1
 scoreboard players set in_lobby flags 0
@@ -64,10 +57,8 @@ bossbar set minecraft:dragon visible true
 bossbar set minecraft:dragon players @a
 title @a times 0 10 0
 
-# saturation
 function zeroboard:settings/saturation
 
 difficulty easy
 
-# custom commands
 execute in minecraft:the_end run function practice:custom_commands/create

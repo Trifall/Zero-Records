@@ -1,7 +1,5 @@
-# reset
 execute if score #filter_action zc_ctrl matches 1 run function zeroboard:filter/defaults
 
-# location
 execute if score #filter_action zc_ctrl matches 2 run scoreboard players add #filter_location zc_ctrl 1
 execute if score #filter_action zc_ctrl matches 2 if score #filter_location zc_ctrl matches 4.. run scoreboard players set #filter_location zc_ctrl -1
 
@@ -25,7 +23,6 @@ execute if score #filter_action zc_ctrl matches 6 if score #old_filter zc_ctrl m
 execute if score #filter_action zc_ctrl matches 6 if score #old_filter zc_ctrl matches 76..102 run scoreboard players add #filter_tower zc_ctrl 3
 execute if score #filter_action zc_ctrl matches 6 if score #old_filter zc_ctrl matches 103 run scoreboard players set #filter_tower zc_ctrl -1
 
-# spawn
 execute if score #filter_action zc_ctrl matches 7 run scoreboard players add #filter_spawn zc_ctrl 1
 execute if score #filter_action zc_ctrl matches 7 if score #filter_spawn zc_ctrl matches 18.. run scoreboard players set #filter_spawn zc_ctrl 0
 
@@ -39,11 +36,9 @@ execute if score #filter_action zc_ctrl matches 8 if score #old_filter zc_ctrl m
 execute if score #filter_action zc_ctrl matches 8 if score #old_filter zc_ctrl matches 6 run scoreboard players set #filter_pickaxe zc_ctrl 0
 execute if score #filter_action zc_ctrl matches 8 if score #old_filter zc_ctrl matches 0 run scoreboard players set #filter_pickaxe zc_ctrl -1
 
-# rotation
 execute if score #filter_action zc_ctrl matches 9 run scoreboard players add #filter_rotation zc_ctrl 1
 execute if score #filter_action zc_ctrl matches 9 if score #filter_rotation zc_ctrl matches 2.. run scoreboard players set #filter_rotation zc_ctrl -1
 
-# any change drops you back to page 1
 scoreboard players set #page zc_ctrl 0
 function zeroboard:filter/apply
 function zeroboard:menu/clean

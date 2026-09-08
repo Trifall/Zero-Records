@@ -6,7 +6,6 @@ execute if score #sim_markers_valid zc_ctrl matches 0 run kill @e[type=minecraft
 execute if score #sim_markers_valid zc_ctrl matches 0 run scoreboard players set #prediction_stage zc_ctrl 3
 execute if score #sim_markers_valid zc_ctrl matches 1 run function zeroboard:prediction/chunk
 
-# landed, or out of steps
 scoreboard players set #sim_branch_done zc_ctrl 0
 execute if score #sim_markers_valid zc_ctrl matches 1 if score #sim_done zc_ctrl matches 1 run scoreboard players set #sim_branch_done zc_ctrl 1
 execute if score #sim_markers_valid zc_ctrl matches 1 if score #sim_steps zc_ctrl matches 600.. run scoreboard players set #sim_branch_done zc_ctrl 1

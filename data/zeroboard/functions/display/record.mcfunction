@@ -1,4 +1,3 @@
-# tower column
 scoreboard players set ZRTower zc_ctrl 0
 scoreboard players set ZRStand zc_ctrl 0
 scoreboard players set ZRCover zc_ctrl -1
@@ -8,6 +7,8 @@ scoreboard players set ZRFist zc_ctrl 0
 scoreboard players set ZRDeathTicks zc_ctrl 0
 scoreboard players set ZRFinishTicks zc_ctrl 0
 scoreboard players set ZRApproach zc_ctrl -1
+scoreboard players set ZRAngle zc_ctrl -1
+scoreboard players set ZRSpeed zc_ctrl -1
 execute store result score ZRTower zc_ctrl run data get storage zeroboard:records work.render.tower
 execute store result score ZRStand zc_ctrl run data get storage zeroboard:records work.render.standing
 execute store result score ZRCover zc_ctrl run data get storage zeroboard:records work.render.cover
@@ -16,10 +17,11 @@ execute store result score ZRPick zc_ctrl run data get storage zeroboard:records
 execute store result score ZRDeathTicks zc_ctrl run data get storage zeroboard:records work.render.death_ticks
 execute store result score ZRFinishTicks zc_ctrl run data get storage zeroboard:records work.render.finish_ticks
 execute store result score ZRApproach zc_ctrl run data get storage zeroboard:records work.render.approach_code
+execute if data storage zeroboard:records work.render.angle store result score ZRAngle zc_ctrl run data get storage zeroboard:records work.render.angle
+execute if data storage zeroboard:records work.render.speed store result score ZRSpeed zc_ctrl run data get storage zeroboard:records work.render.speed
 execute if data storage zeroboard:records work.render{cover:2,pickaxe:"Fist"} run scoreboard players set ZRFist zc_ctrl 1
 execute if score ZRCover zc_ctrl matches 0 run scoreboard players set ZRPick zc_ctrl 0
 
-# short label for the board
 data modify storage zeroboard:records work.render.tower_short set value "Unknown"
 execute if score ZRTower zc_ctrl matches 76 run data modify storage zeroboard:records work.render.tower_short set value "S-76"
 execute if score ZRTower zc_ctrl matches 79 run data modify storage zeroboard:records work.render.tower_short set value "C-79"
@@ -36,21 +38,12 @@ execute if score ZRTower zc_ctrl matches 103 run data modify storage zeroboard:r
 scoreboard players operation ZRTimeTicks zc_ctrl = ZRDeathTicks zc_ctrl
 execute if score #time_mode zc_ctrl matches 1 if score ZRFinishTicks zc_ctrl matches 1.. run scoreboard players operation ZRTimeTicks zc_ctrl = ZRFinishTicks zc_ctrl
 
-# ticks -> m/s/hundredths
-scoreboard players operation ZRMin zc_ctrl = ZRTimeTicks zc_ctrl
-scoreboard players operation ZRMin zc_ctrl /= #c1200 zc_ctrl
-scoreboard players operation ZRSec zc_ctrl = ZRTimeTicks zc_ctrl
-scoreboard players operation ZRSec zc_ctrl /= #c20 zc_ctrl
-scoreboard players operation ZRSec zc_ctrl %= #c60 zc_ctrl
+scoreboard players operation ZRTotalSec zc_ctrl = ZRTimeTicks zc_ctrl
+scoreboard players operation ZRTotalSec zc_ctrl /= #c20 zc_ctrl
 scoreboard players operation ZRHun zc_ctrl = ZRTimeTicks zc_ctrl
 scoreboard players operation ZRHun zc_ctrl %= #c20 zc_ctrl
 scoreboard players operation ZRHun zc_ctrl *= #c5 zc_ctrl
 
-scoreboard players operation ZRTotalSec zc_ctrl = ZRMin zc_ctrl
-scoreboard players operation ZRTotalSec zc_ctrl *= #c60 zc_ctrl
-scoreboard players operation ZRTotalSec zc_ctrl += ZRSec zc_ctrl
-
-# spawn column
 data modify storage zeroboard:records work.render.spawn_short set value "Unknown"
 execute if score ZRCover zc_ctrl matches 0 run data modify storage zeroboard:records work.render.spawn_short set value "Open"
 execute if score ZRCover zc_ctrl matches 1 run data modify storage zeroboard:records work.render.spawn_short set value "Overhang"
@@ -77,6 +70,23 @@ execute if score ZRApproach zc_ctrl matches 4 run data modify storage zeroboard:
 execute if score ZRApproach zc_ctrl matches 5 run data modify storage zeroboard:records work.render.approach_short set value "Back CCW"
 execute if score ZRApproach zc_ctrl matches 6 run data modify storage zeroboard:records work.render.approach_short set value "Front 1/8 CCW"
 execute if score ZRApproach zc_ctrl matches 7 run data modify storage zeroboard:records work.render.approach_short set value "Back 1/8 CCW"
+
+# diagonal: fast / slow from the band the spawn angle fell in
+execute if score ZRSpeed zc_ctrl matches 0 if score ZRApproach zc_ctrl matches 0 run data modify storage zeroboard:records work.render.approach_short set value "Front Fast CW"
+execute if score ZRSpeed zc_ctrl matches 0 if score ZRApproach zc_ctrl matches 1 run data modify storage zeroboard:records work.render.approach_short set value "Back Fast CW"
+execute if score ZRSpeed zc_ctrl matches 0 if score ZRApproach zc_ctrl matches 4 run data modify storage zeroboard:records work.render.approach_short set value "Front Fast CCW"
+execute if score ZRSpeed zc_ctrl matches 0 if score ZRApproach zc_ctrl matches 5 run data modify storage zeroboard:records work.render.approach_short set value "Back Fast CCW"
+execute if score ZRSpeed zc_ctrl matches 1 if score ZRApproach zc_ctrl matches 0 run data modify storage zeroboard:records work.render.approach_short set value "Front Slow CW"
+execute if score ZRSpeed zc_ctrl matches 1 if score ZRApproach zc_ctrl matches 1 run data modify storage zeroboard:records work.render.approach_short set value "Back Slow CW"
+execute if score ZRSpeed zc_ctrl matches 1 if score ZRApproach zc_ctrl matches 4 run data modify storage zeroboard:records work.render.approach_short set value "Front Slow CCW"
+execute if score ZRSpeed zc_ctrl matches 1 if score ZRApproach zc_ctrl matches 5 run data modify storage zeroboard:records work.render.approach_short set value "Back Slow CCW"
+scoreboard players operation ZRAngleWhole zc_ctrl = ZRAngle zc_ctrl
+scoreboard players operation ZRAngleWhole zc_ctrl /= #c10 zc_ctrl
+scoreboard players operation ZRAngleTenth zc_ctrl = ZRAngle zc_ctrl
+scoreboard players operation ZRAngleTenth zc_ctrl %= #c10 zc_ctrl
+# spawn angle, records from before it was kept have none
+data modify storage zeroboard:records work.render.angle_text set value '""'
+execute if score ZRAngle zc_ctrl matches 0.. run data modify storage zeroboard:records work.render.angle_text set value '[{"text":" ("},{"score":{"name":"ZRAngleWhole","objective":"zc_ctrl"}},{"text":"."},{"score":{"name":"ZRAngleTenth","objective":"zc_ctrl"}},{"text":")"}]'
 
 execute if score ZRHun zc_ctrl matches 0 as @e[tag=zc_target_line1,limit=1] at @s run loot replace block 139 63 0 container.0 loot zeroboard:render/line1_whole
 execute if score ZRHun zc_ctrl matches 1..9 as @e[tag=zc_target_line1,limit=1] at @s run loot replace block 139 63 0 container.0 loot zeroboard:render/line1_low

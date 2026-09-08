@@ -1,7 +1,4 @@
-# rebuilds the settings entries this pack adds or extends, and carries forward
-# anything saved under an older menu layout. called from load.
-# base entries are edited in place (settings/extend), the pack's own are rebuilt from
-# a template with just the saved value kept (settings/install).
+# preserve saved values while rebuilding added settings and extending base entries.
 
 # the in-place edits need one entry per index, see practice:gui/dedupe
 data modify storage practice:gui src set from storage practice:gui pages[1].entries
@@ -11,13 +8,7 @@ data modify storage practice:gui src set from storage practice:gui pages[1].defa
 function practice:gui/dedupe
 data modify storage practice:gui pages[1].defaults set from storage practice:gui clean
 
-# spawn menu migrations.
-# the list has been renumbered twice as entries went in, so an old world still has the
-# old index sitting in practice:gui. each one moves the stored value a single layout
-# forward and sets its marker, so an old world walks up a version at a time and a
-# current one skips the lot.
-# keep them separate and in this order - collapsing them breaks any world that has not
-# been through the earlier steps yet.
+# apply migrations in order; each consumes the previous menu layout.
 execute unless score #buried_v2 zc_ctrl matches 1 run function zeroboard:settings/migrate/spawn_v2
 scoreboard players set #buried_v2 zc_ctrl 1
 execute unless score #buried_v3 zc_ctrl matches 1 run function zeroboard:settings/migrate/spawn_v3
@@ -49,7 +40,6 @@ scoreboard players reset death_skip settings
 scoreboard players reset #death_skip_entry zc_ctrl
 scoreboard players reset #death_skip_default zc_ctrl
 
-# Fly Chance
 scoreboard players set #tmpl_value zc_ctrl -1
 scoreboard players set #tmpl_default zc_ctrl -1
 execute store result score #tmpl_value zc_ctrl run data get storage practice:gui pages[1].entries[{tag:{index:14b}}].value
@@ -62,7 +52,6 @@ data modify storage practice:gui tmpl set value {Slot:3b,id:"minecraft:end_rod",
 function zeroboard:settings/install
 scoreboard players operation fly_chance settings = #tmpl_value zc_ctrl
 
-# On Crystal Break
 scoreboard players set #tmpl_value zc_ctrl -1
 scoreboard players set #tmpl_default zc_ctrl -1
 execute store result score #tmpl_value zc_ctrl run data get storage practice:gui pages[1].entries[{tag:{index:15b}}].value
@@ -73,7 +62,6 @@ data modify storage practice:gui tmpl set value {Slot:4b,id:"minecraft:end_cryst
 function zeroboard:settings/install
 scoreboard players operation crystal_break settings = #tmpl_value zc_ctrl
 
-# Fireball Chance
 scoreboard players set #tmpl_value zc_ctrl -1
 scoreboard players set #tmpl_default zc_ctrl -1
 execute store result score #tmpl_value zc_ctrl run data get storage practice:gui pages[1].entries[{tag:{index:16b}}].value
@@ -84,7 +72,6 @@ data modify storage practice:gui tmpl set value {Slot:5b,id:"minecraft:fire_char
 function zeroboard:settings/install
 scoreboard players operation fireball_chance settings = #tmpl_value zc_ctrl
 
-# 1/8 Always Fly
 scoreboard players set #tmpl_value zc_ctrl -1
 scoreboard players set #tmpl_default zc_ctrl -1
 execute store result score #tmpl_value zc_ctrl run data get storage practice:gui pages[1].entries[{tag:{index:17b}}].value
@@ -95,7 +82,6 @@ data modify storage practice:gui tmpl set value {Slot:6b,id:"minecraft:feather",
 function zeroboard:settings/install
 scoreboard players operation one_eighth_fly settings = #tmpl_value zc_ctrl
 
-# Vanilla End Entry
 scoreboard players set #tmpl_value zc_ctrl -1
 scoreboard players set #tmpl_default zc_ctrl -1
 execute store result score #tmpl_value zc_ctrl run data get storage practice:gui pages[1].entries[{tag:{index:19b}}].value

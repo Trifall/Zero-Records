@@ -1,4 +1,3 @@
-# resets
 execute as @a[scores={reset=1..}] unless score in_lobby flags matches 1 in minecraft:the_end run function practice:reset
 execute as @a[scores={reset_drop=1..}] unless score in_lobby flags matches 1 in minecraft:the_end run function practice:reset
 execute as @a[scores={reset_i_pick=1..}] unless score in_lobby flags matches 1 in minecraft:the_end run function practice:reset
@@ -6,13 +5,10 @@ execute as @a[scores={reset_g_pick=1..}] unless score in_lobby flags matches 1 i
 execute as @a[scores={death=1..}] in minecraft:the_end run function practice:reset
 scoreboard players reset * reset
 
-# run timer
 execute if score in_lobby flags matches 0 run function practice:timer/timer
 
-# run gui
 execute if score in_lobby flags matches 1 run function practice:gui/main
 
-# crystals
 # undo always_fly's one-tick dip before anything below samples the dragon
 execute if score #af_dip100 zc_ctrl matches 1.. if entity @e[type=minecraft:ender_dragon,limit=1] run function practice:crystal_break/always_fly_restore
 scoreboard players set #af_dip100 zc_ctrl 0
@@ -20,57 +16,41 @@ execute store result score phase stats run data get entity @e[type=ender_dragon,
 execute if score in_lobby flags matches 0 run function practice:check_crystals
 function practice:fireball_chance
 
-# dragon health and knockback
 function practice:health_display
 execute if score knockback settings matches 0 run function practice:knockback_display
 
-# post fight logic
 execute if score phase stats matches 0 if score onecycle flags matches 1 run scoreboard players set phase stats 9
 execute if score phase stats matches 9 if score diff health matches 1.. run function practice:dragon_killed
 # freeze the prediction before the dragon entity despawns
 execute unless score onecycle flags matches 1 if score flying_to_fountain flags matches 1 if score phase stats matches 9 if score current health matches ..0 unless score #finish_locked zc_ctrl matches 1 run function zeroboard:prediction/lock
-# confirm the finish the tick the 10s ending death animation starts. vanilla zeroes
-# the dragon's Health there (fountain arrival, or a block hit mid flight) and
-# selectors stop seeing it - only its parts are left, and those carry no
-# DragonPhase, so phase stats reads 0. that is the tell the base map's finish
-# keyed on; a 10-block fountain check missed collision deaths and only caught up
-# when the entity despawned 200t later. the flydown before it stays untouched.
-# active==1 makes both triggers single-fire, and stays clear of prediction/lock's
-# #finish_locked - lock runs first on the same tick.
+# fountain arrival or collision zeroes Health, leaving only multipart entities
+# without DragonPhase. phase stats reads 0 then; active makes confirmation single-fire
+# after prediction/lock has sampled the same tick.
 execute if score flying_to_fountain flags matches 1 if score active timer matches 1 if score phase stats matches 0 run function practice:finish
 # fallback - dragon gone outright (onecycle pins phase stats to 9 once it is)
 execute if score flying_to_fountain flags matches 1 if score active timer matches 1 unless entity @e[type=minecraft:ender_dragon,limit=1] run function practice:finish
 
-# saturation
 execute as @a store result score player saturation run data get entity @s foodSaturationLevel
 # 21 = keep topped up
 execute if score saturation settings matches 21 if score player saturation matches ..1 run effect give @a minecraft:saturation 1 0
 
-# first bed placed time
 execute unless score onecycle flags matches 1 as @a[scores={bed_place=1}] if score timer settings matches 0 if score explosives stats matches 0 run tellraw @a [{"nbt":"time_string","storage":"practice:timeparser","interpret":true},{"text":" 1st Bed Placed","color":"white"}]
 scoreboard players set @a[scores={bed_place=1}] bed_place 2
 
-# kill out of map player
 execute as @a[gamemode=survival] at @s run kill @s[y=30,dy=-10]
 
-# rename loadout check
 execute if score in_lobby flags matches 1 unless score editing_loadout flags matches 1 run function practice:inventory/rename/check
 
-# show nodes
 execute if score show_nodes settings matches 0 if score in_lobby flags matches 0 in the_end run function practice:nodes/show
 execute if score show_nodes settings matches 1 in the_end run function practice:nodes/show_all
 
-# player in overworld fix (probably unnecessary since v1.2)
 execute unless score #vanilla_entry_pending zc_ctrl matches 1 in minecraft:overworld positioned 0 0 0 as @a[distance=0..] in minecraft:the_end run tp @s 135 65 0 90 0
 
-# repair lobby
 scoreboard players enable @a repair
 execute if entity @a[scores={repair=1..}] in minecraft:the_end run function practice:level/repair
 
-# pearl tracker
 execute unless score pearl_tracker settings matches 3 unless score in_lobby flags matches 1 run function practice:pearl_tracker/track
 
-# dragon path tracer
 execute if score path_tracer settings matches 1 run function practice:path_tracer
 
 # sim needs a real position and heading to start from

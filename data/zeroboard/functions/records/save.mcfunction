@@ -1,7 +1,7 @@
 # a kill mid prediction has to resolve now, there is no later
 execute if score #prediction_active zc_ctrl matches 1 in minecraft:the_end run function zeroboard:prediction/force_finish
 scoreboard players operation #prediction_pb_before zc_ctrl = #pb_ticks zc_ctrl
-data modify storage zeroboard:records current set value {id:0,standing:0,base:0,plus:0,type:"Other",tower:0,approach:"Unknown",approach_code:-1,cover:-1,buried:-1,spawn:"Unknown",pickaxe_code:0,pickaxe:"None",death_ticks:0,finish_ticks:0,finish_actual:0b,finish_source:0,predicted_flight_ticks:0,prediction_guard:0,prediction_pending:0b,prediction_ready:0b,prediction_announced:0b,pb_before_ticks:0,show_time:0b,arrival_ticks:0,actual_flight_ticks:0,flight_error:0,death_tail_ticks:0,observed_finish_ticks:0,finish_observation_error:0}
+data modify storage zeroboard:records current set value {id:0,standing:0,base:0,plus:0,type:"Other",tower:0,approach:"Unknown",approach_code:-1,angle:-1,speed:-1,cover:-1,buried:-1,spawn:"Unknown",pickaxe_code:0,pickaxe:"None",death_ticks:0,finish_ticks:0,finish_actual:0b,finish_source:0,predicted_flight_ticks:0,prediction_guard:0,prediction_pending:0b,prediction_ready:0b,prediction_announced:0b,pb_before_ticks:0,show_time:0b,arrival_ticks:0,actual_flight_ticks:0,flight_error:0,death_tail_ticks:0,observed_finish_ticks:0,finish_observation_error:0}
 scoreboard players add #next_id zc_ctrl 1
 scoreboard players operation #active_record zc_ctrl = #next_id zc_ctrl
 scoreboard players set #finish_locked zc_ctrl 0
@@ -15,7 +15,6 @@ execute if score timer settings matches 0 run data modify storage zeroboard:reco
 
 function zeroboard:records/type
 
-# tower x
 execute if score tower settings matches 0 run data modify storage zeroboard:records current.tower set value 76
 execute if score tower settings matches 1 run data modify storage zeroboard:records current.tower set value 79
 execute if score tower settings matches 2 run data modify storage zeroboard:records current.tower set value 82
@@ -42,8 +41,9 @@ execute if score #approach zc_ctrl matches 4 run data modify storage zeroboard:r
 execute if score #approach zc_ctrl matches 5 run data modify storage zeroboard:records current.approach set value "Back Diagonal CCW"
 execute if score #approach zc_ctrl matches 6 run data modify storage zeroboard:records current.approach set value "Front Straight CCW"
 execute if score #approach zc_ctrl matches 7 run data modify storage zeroboard:records current.approach set value "Back Straight CCW"
+execute store result storage zeroboard:records current.angle int 1 run scoreboard players get angle_act settings
+execute store result storage zeroboard:records current.speed int 1 run scoreboard players get speed_act settings
 
-# spawn
 execute if score spawn_act settings matches 0 run data modify storage zeroboard:records current merge value {cover:0,buried:-1,spawn:"Open"}
 execute if score spawn_act settings matches 1 run data modify storage zeroboard:records current merge value {cover:1,buried:-1,spawn:"Overhang"}
 execute if score spawn_act settings matches 3 run data modify storage zeroboard:records current merge value {cover:2,buried:52,spawn:"O52"}
@@ -70,7 +70,6 @@ execute if data storage zeroboard:records current{pickaxe_code:0} if entity @a[n
 execute if data storage zeroboard:records current{pickaxe_code:0} if entity @a[nbt={Inventory:[{id:"minecraft:wooden_pickaxe"}]}] run data modify storage zeroboard:records current merge value {pickaxe_code:6,pickaxe:"Wood"}
 execute if data storage zeroboard:records current{cover:2,pickaxe_code:0} run data modify storage zeroboard:records current.pickaxe set value "Fist"
 
-# onto the front of the list, then predict the finish
 data modify storage zeroboard:records records prepend from storage zeroboard:records current
 function zeroboard:prediction/predict
 

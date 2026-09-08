@@ -1,4 +1,3 @@
-# Dragon page - approach and dragon behaviour
 data modify storage practice:gui settings_view set value []
 data modify storage practice:gui settings_view append from storage practice:gui pages[1].entries[{tag:{index:0b}}]
 execute if data storage practice:gui settings_view[{tag:{index:0b}}] run data modify storage practice:gui settings_view[{tag:{index:0b}}].Slot set value 9b

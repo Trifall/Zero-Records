@@ -1,11 +1,9 @@
-# get lookup values for spawn rotations
-# the walk itself moved to zeroboard:settings/angles, six variants to pick from
+# settings/angles selects the spawn rotation lookup row.
 execute store result score start rng run data get storage practice:rotation_lookup temp[0]
 execute store result score mod rng run data get storage practice:rotation_lookup temp[1]
 execute store result score size1 rng run data get storage practice:rotation_lookup temp[2]
 execute store result score gap rng run data get storage practice:rotation_lookup temp[3]
 
-# generate random spawn rotation
 function practice:random/generate
 execute if score r rng > size1 rng run scoreboard players operation r rng += gap rng
 scoreboard players operation r rng += start rng
@@ -13,9 +11,12 @@ scoreboard players operation r rng %= 3600 c
 
 execute if score rotation settings matches 3 run scoreboard players operation r rng = value custom_rotation
 
+scoreboard players operation angle_act settings = r rng
+scoreboard players operation angle_act settings %= #c3600 zc_ctrl
+function zeroboard:settings/angle_band
+
 tellraw @a[tag=debug] [{"text":"[DEBUG] Rotation: ","color":"dark_purple"},{"score":{"name":"r","objective":"rng"}}]
 
-# spawn dragon
 execute if score r rng matches 0..449 in minecraft:the_end run summon minecraft:ender_dragon 0.0 128 0.0 {Tags:["zc_practice_dragon"],DragonPhase:0b,Rotation:[22.5f,0f]}
 execute if score r rng matches 450..899 in minecraft:the_end run summon minecraft:ender_dragon 0.0 128 0.0 {Tags:["zc_practice_dragon"],DragonPhase:0b,Rotation:[67.5f,0f]}
 execute if score r rng matches 900..1349 in minecraft:the_end run summon minecraft:ender_dragon 0.0 128 0.0 {Tags:["zc_practice_dragon"],DragonPhase:0b,Rotation:[112.5f,0f]}

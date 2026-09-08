@@ -4,7 +4,8 @@
     {"function": "minecraft:set_name", "entity": "this", "name": [
       {"nbt": "work.render.spawn_short", "storage": "zeroboard:records", "interpret": false, "color": "green"},
       {"text": " \u00d8 ", "color": "red"},
-      {"nbt": "work.render.approach_short", "storage": "zeroboard:records", "interpret": false, "color": "white"}
+      {"nbt": "work.render.approach_short", "storage": "zeroboard:records", "interpret": false, "color": "white"},
+      {"nbt": "work.render.angle_text", "storage": "zeroboard:records", "interpret": true, "color": "white"}
     ]}
   ]}]}]
 }

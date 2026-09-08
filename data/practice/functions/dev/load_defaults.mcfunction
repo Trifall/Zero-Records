@@ -1,4 +1,3 @@
-# load default settings
 data modify storage practice:gui pages[1].entries set from storage practice:gui pages[1].defaults
 
 execute store result score location settings run data get storage practice:gui pages[1].entries[{tag:{index:0b}}].value
@@ -21,10 +20,8 @@ execute store result score fireball_chance settings run data get storage practic
 execute store result score one_eighth_fly settings run data get storage practice:gui pages[1].entries[{tag:{index:17b}}].value
 execute store result score vanilla_entry settings run data get storage practice:gui pages[1].entries[{tag:{index:19b}}].value
 
-# enable all towers
 function practice:gui/pages/home/enable_all_towers
 
-# load default loadouts
 data modify storage zero_practice_loadouts:loadouts loadouts set from storage zero_practice_loadouts:loadouts default_loadouts
 scoreboard players set loadout inv 0
 

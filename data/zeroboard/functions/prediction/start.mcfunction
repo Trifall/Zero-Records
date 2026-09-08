@@ -1,4 +1,3 @@
-# clear out anything left from a previous run
 kill @e[type=minecraft:armor_stand,tag=zc_dragon_sim]
 data remove storage zeroboard:debug prediction
 scoreboard players set #sim_steps zc_ctrl 0

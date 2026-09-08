@@ -1,7 +1,5 @@
-# the dragon is left to play out the full 10s ending death animation. the finish
-# is confirmed the tick that animation starts, so its constant 200t tail is added
-# up front instead of waited out - its parts still answer the selector then. the
-# fallback (dragon gone outright) already lived through the tail.
+# confirm at fountain arrival or collision and add the 200t death animation up front.
+# the missing-dragon fallback has already lived through that tail.
 execute if entity @e[type=minecraft:ender_dragon,limit=1] run scoreboard players add timer timer 200
 scoreboard players set active timer 0
 # keeps prediction/lock out of the post-confirm window; cleared when the next

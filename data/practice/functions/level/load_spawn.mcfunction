@@ -34,7 +34,6 @@ execute if score spawn settings matches 1 run function practice:random/generate
 execute if score spawn settings matches 1 run scoreboard players operation spawn_act settings = r rng
 execute if score spawn settings matches 1 if score spawn_act settings matches 2..15 run scoreboard players add spawn_act settings 1
 
-# random cage
 execute if score spawn_act settings matches 2 run function practice:level/load_random_cage
 
 # populate structure block - one structure covers a range of depths, extend_buried

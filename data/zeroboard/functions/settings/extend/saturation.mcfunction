@@ -1,4 +1,3 @@
-# saturation, None / 1..20 points / Max
 function zeroboard:settings/migrate/saturation
 
 data modify storage practice:gui hl set from storage practice:gui pages[1].entries[{tag:{index:3b}}]

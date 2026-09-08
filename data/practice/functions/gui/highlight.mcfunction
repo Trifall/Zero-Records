@@ -1,4 +1,3 @@
-# repaint practice:gui hl's Lore: every choice gray, the one at #hl_value gold
 data modify storage practice:gui hl.tag.display.Lore set from storage practice:gui hl.tag.display.LoreGray
 execute if score #hl_value zc_ctrl matches 0 run data modify storage practice:gui hl.tag.display.Lore[0] set from storage practice:gui hl.tag.display.LoreColor[0]
 execute if score #hl_value zc_ctrl matches 1 run data modify storage practice:gui hl.tag.display.Lore[1] set from storage practice:gui hl.tag.display.LoreColor[1]

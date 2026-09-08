@@ -1,4 +1,3 @@
-# rotation: cw / ccw / random / custom plus the fast and slow variants
 data modify storage practice:gui hl set from storage practice:gui pages[1].entries[{tag:{index:7b}}]
 data modify storage practice:gui hl.size set value 8
 data modify storage practice:gui hl.tag.display.LoreGray set value ['{"text":"CW","color":"gray","italic":"false"}','{"text":"CCW","color":"gray","italic":"false"}','{"text":"Random","color":"gray","italic":"false"}','{"text":"Custom","color":"gray","italic":"false"}','{"text":"Fast CW","color":"gray","italic":"false"}','{"text":"Fast CCW","color":"gray","italic":"false"}','{"text":"Slow CW","color":"gray","italic":"false"}','{"text":"Slow CCW","color":"gray","italic":"false"}']

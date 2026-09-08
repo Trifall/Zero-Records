@@ -1,4 +1,3 @@
-# slice the current page out of the filtered list
 data modify storage zeroboard:records work.page_source set value []
 data modify storage zeroboard:records work.page_source set from storage zeroboard:records filtered
 execute if score #time_mode zc_ctrl matches 1 run function zeroboard:records/finishing/apply

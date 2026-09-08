@@ -3,19 +3,15 @@ execute if score #prediction_active zc_ctrl matches 1 in minecraft:the_end run f
 schedule clear practice:tp_player
 schedule clear practice:spawn_dragon
 schedule clear practice:level/refill_nodes
-# a reset can land inside the node-probe window (2t, or 13t with Vanilla Entry),
-# and the schedule clear above would strand those terrain edits - a dug-out
-# Ranked column or a leftover barrier then skews every later run's node heights.
-# refill_nodes covers all four fly modes and is safe to repeat.
+# reset can interrupt node probing; restore the terrain after clearing its schedule
+# so temporary columns and barriers cannot affect the next attempt.
 function practice:level/refill_nodes
 
-# clear the leftover dragon; the kill below handles everything else the attempt left
 function practice:cleanup_dragon
 # #practice:remove includes ender_dragon; cleanup_dragon owns dragon removal, so
 # keep it out of this kill
 kill @e[type=#practice:remove,type=!minecraft:ender_dragon]
 
-# player
 execute in minecraft:overworld run fill 495 249 495 505 249 505 minecraft:air replace minecraft:barrier
 execute in minecraft:overworld run forceload remove 495 495 505 505
 execute in minecraft:the_end run forceload remove -80 -80 80 80
@@ -29,10 +25,8 @@ stopsound @a
 gamemode survival @a
 
 function practice:level/clear
-# drop the y=128 platform if it is still up
 function zeroboard:settings/clear_y128
 
-# reset scores
 scoreboard players set active timer 0
 scoreboard players reset * reset
 scoreboard players reset * reset_drop

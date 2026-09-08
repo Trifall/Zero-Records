@@ -1,6 +1,4 @@
-# which approach the run actually ends up using. rotation covers cw, ccw, random,
-# custom and the fast / slow variants, so the direction gets picked here and the
-# lookup table is walked down to the row practice:spawn_dragon reads.
+# resolve the actual direction before tower selection and select the spawn lookup row.
 
 scoreboard players operation rotation_act settings = rotation settings
 execute if score rotation settings matches 2 run scoreboard players set rotation_act settings 0
@@ -9,6 +7,8 @@ execute if score rotation settings matches 4 run scoreboard players set rotation
 execute if score rotation settings matches 5 run scoreboard players set rotation_act settings 1
 execute if score rotation settings matches 6 run scoreboard players set rotation_act settings 0
 execute if score rotation settings matches 7 run scoreboard players set rotation_act settings 1
+scoreboard players set speed_act settings -1
+execute if score rotation settings matches 3 run function zeroboard:settings/custom_angle
 
 execute if score location_act settings matches 0 run data modify storage practice:rotation_lookup temp set from storage practice:rotation_lookup values[0]
 execute if score location_act settings matches 1 run data modify storage practice:rotation_lookup temp set from storage practice:rotation_lookup values[1]
