@@ -1,6 +1,5 @@
 {
   "values": [
-    "zeroboard:load"
+    "zeroboard:compat/load"
   ]
 }
-

@@ -1,0 +1,2 @@
+setblock 136 66 -4 minecraft:barrier
+setblock 136 66 -3 minecraft:oak_wall_sign[facing=south,waterlogged=false]{Text1:'{"clickEvent":{"action":"run_command","value":"execute as @p run trigger hub"},"text":""}',Text2:'{"extra":[{"bold":true,"color":"#FFFFA4","text":"Back "},{"color":"#FFFFA4","text":"to"},{"bold":true,"color":"#68F897","text":" Hub"}],"text":""}',Text3:'{"text":""}',Text4:'{"text":""}'}

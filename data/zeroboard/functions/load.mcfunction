@@ -2,6 +2,8 @@ scoreboard objectives add zc_ctrl dummy
 scoreboard objectives add zc_menu dummy
 scoreboard objectives add custom_1_8_fly dummy
 scoreboard objectives add custom_diag_fly dummy
+scoreboard objectives add custom_rotation dummy
+execute unless score value custom_rotation = value custom_rotation run scoreboard players set value custom_rotation 0
 scoreboard objectives add sqrt dummy
 scoreboard objectives add c dummy
 scoreboard players set 2 c 2
@@ -40,6 +42,7 @@ execute unless score settings_page gui matches 0..2 run scoreboard players set s
 execute unless score value custom_1_8_fly = value custom_1_8_fly run scoreboard players set value custom_1_8_fly 92
 execute unless score value custom_diag_fly = value custom_diag_fly run scoreboard players set value custom_diag_fly 95
 function zeroboard:settings/load
+execute unless score tower_pages_v2 gui matches 1 run function practice:gui/pages/home/init_pages
 function practice:gui/load
 
 execute unless score #filter_init zc_ctrl matches 1 run function zeroboard:filter/defaults

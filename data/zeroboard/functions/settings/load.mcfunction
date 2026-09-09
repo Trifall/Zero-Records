@@ -20,6 +20,11 @@ execute if data storage practice:gui pages[1].entries[{tag:{index:4b}}] if data 
 execute if data storage practice:gui pages[1].entries[{tag:{index:3b}}] if data storage practice:gui pages[1].defaults[{tag:{index:3b}}] run function zeroboard:settings/extend/saturation
 execute if data storage practice:gui pages[1].entries[{tag:{index:7b}}] if data storage practice:gui pages[1].defaults[{tag:{index:7b}}] run function zeroboard:settings/extend/rotation
 
+# MCSR and 1.2.1 base packs predate the 1.2.2 Fire Resistance (12) and Dragon (13)
+# entries, so nothing ever sets their scores and play gates the dragon on matches 0
+execute unless score fireres settings = fireres settings run scoreboard players set fireres settings 0
+execute unless score disable_dragon settings = disable_dragon settings run scoreboard players set disable_dragon settings 0
+
 # the base pack fills the top row's spare cells (slots 3-8) with panes. the pack's own
 # controls go there instead, and index 18 (Death Skip) was retired
 data remove storage practice:gui pages[1].entries[{Slot:3b,tag:{index:-1b}}]

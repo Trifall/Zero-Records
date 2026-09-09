@@ -22,3 +22,4 @@ setblock 139 63 0 minecraft:barrel[facing=down] replace
 function zeroboard:display/entities
 function zeroboard:menu/build
 scoreboard players set #dirty zc_ctrl 1
+execute if data storage zeroboard:compat {mcsr:1b} run function zeroboard:lobby/hub_sign

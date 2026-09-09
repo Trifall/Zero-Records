@@ -1,6 +1,5 @@
 {
   "values": [
-    "zeroboard:tick"
+    "zeroboard:compat/tick"
   ]
 }
-

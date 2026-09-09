@@ -11,18 +11,19 @@ A Minecraft Java Edition datapack (1.16.x) that extends [Zero Practice v1.2.2 by
 
 ## Requirements
 
-- Minecraft Java Edition 1.16.x
-- **Zero Practice v1.2.2 by Mescht** must be installed, with this pack loaded **above** it.
+- Minecraft Java Edition 1.16.1
+- One of: **Zero Practice v1.2.1 or v1.2.2 by Mescht**, or the Zero mode in **MCSR Practice 2.0.0 by Dibedy**. This pack must load **above** the base pack (and above MCSR's LobbySystem).
 
 ## Installation
 
 1. Download both datapacks and place them in your world's `datapacks/` folder.
-2. Ensure Zero Records sits above Zero Practice in the load order (`/datapack list`).
+2. Ensure Zero Records sits above Zero Practice (and LobbySystem in MCSR) in the load order (`/datapack list`).
 3. Reload with `/reload`.
 
 ## Usage
 
 - Play Zero Practice as usual — kills are recorded automatically.
+- In MCSR Practice, enter Zero with `/trigger zero` and leave with `/trigger hub`; records and settings persist between visits.
 - In the lobby, right-click the **Zero Cycle Filters** chest to open the records menu (browse pages, toggle filters, clear records).
 
 ---
