@@ -25,7 +25,7 @@ execute if score direction_act settings matches 1 if score one_eighth_fly settin
 # spawn dragon. Vanilla End Entry brings the player back first, then the dragon
 # a beat later like a freshly loaded End fight.
 execute if score disable_dragon settings matches 0 if score vanilla_entry settings matches 0 run schedule function practice:spawn_dragon 1t replace
-execute if score disable_dragon settings matches 0 if score vanilla_entry settings matches 1 run schedule function practice:spawn_dragon 12t replace
+execute if score disable_dragon settings matches 0 if score vanilla_entry settings matches 1 run schedule function practice:spawn_dragon 30t replace
 
 execute if score editing_loadout flags matches 1 run function practice:inventory/save_loadout
 execute if score renaming flags matches 1 run function practice:inventory/rename/renamed
