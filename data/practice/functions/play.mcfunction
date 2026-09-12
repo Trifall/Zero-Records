@@ -20,7 +20,6 @@ function practice:level/set_tower_order
 function practice:level/load_towers
 function practice:level/load_terrain
 function practice:nodes/force
-execute if score direction_act settings matches 1 if score one_eighth_fly settings matches 1..3 run function practice:level/one_eighth_always_fly_nodes
 
 # spawn dragon. Vanilla End Entry brings the player back first, then the dragon
 # a beat later like a freshly loaded End fight.

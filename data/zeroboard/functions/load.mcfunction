@@ -1,7 +1,5 @@
 scoreboard objectives add zc_ctrl dummy
 scoreboard objectives add zc_menu dummy
-scoreboard objectives add custom_1_8_fly dummy
-scoreboard objectives add custom_diag_fly dummy
 scoreboard objectives add custom_rotation dummy
 execute unless score value custom_rotation = value custom_rotation run scoreboard players set value custom_rotation 0
 scoreboard objectives add sqrt dummy
@@ -38,11 +36,10 @@ scoreboard players set #dragon_track_active zc_ctrl 0
 # remove the fog bar left by older builds.
 bossbar remove zeroboard:dragon_fog
 
-execute unless score settings_page gui matches 0..2 run scoreboard players set settings_page gui 0
-execute unless score value custom_1_8_fly = value custom_1_8_fly run scoreboard players set value custom_1_8_fly 92
-execute unless score value custom_diag_fly = value custom_diag_fly run scoreboard players set value custom_diag_fly 95
+execute unless score settings_page gui matches 0..3 run scoreboard players set settings_page gui 0
 function zeroboard:settings/load
 execute unless score tower_pages_v2 gui matches 1 run function practice:gui/pages/home/init_pages
+execute unless data storage practice:gui spawn_pool[0] run function practice:gui/pages/settings/spawn_pool/init
 function practice:gui/load
 
 execute unless score #filter_init zc_ctrl matches 1 run function zeroboard:filter/defaults

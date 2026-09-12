@@ -17,10 +17,10 @@ execute store result score disable_dragon settings run data get storage practice
 execute store result score fly_chance settings run data get storage practice:gui pages[1].entries[{tag:{index:14b}}].value
 execute store result score crystal_break settings run data get storage practice:gui pages[1].entries[{tag:{index:15b}}].value
 execute store result score fireball_chance settings run data get storage practice:gui pages[1].entries[{tag:{index:16b}}].value
-execute store result score one_eighth_fly settings run data get storage practice:gui pages[1].entries[{tag:{index:17b}}].value
 execute store result score vanilla_entry settings run data get storage practice:gui pages[1].entries[{tag:{index:19b}}].value
 
 function practice:gui/pages/home/enable_all_towers
+function practice:gui/pages/settings/spawn_pool/enable_all
 
 execute if data storage zero_practice_loadouts:loadouts default_loadouts run data modify storage zero_practice_loadouts:loadouts loadouts set from storage zero_practice_loadouts:loadouts default_loadouts
 execute if data storage practice:loadouts default_loadouts run data modify storage practice:loadouts loadouts set from storage practice:loadouts default_loadouts

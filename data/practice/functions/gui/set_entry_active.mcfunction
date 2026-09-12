@@ -17,7 +17,6 @@ execute if score index gui matches 13 run data modify storage practice:gui pages
 execute if score index gui matches 14 run data modify storage practice:gui pages[{active:1b}].entries[{tag:{index:14b}}].active set value 1b
 execute if score index gui matches 15 run data modify storage practice:gui pages[{active:1b}].entries[{tag:{index:15b}}].active set value 1b
 execute if score index gui matches 16 run data modify storage practice:gui pages[{active:1b}].entries[{tag:{index:16b}}].active set value 1b
-execute if score index gui matches 17 run data modify storage practice:gui pages[{active:1b}].entries[{tag:{index:17b}}].active set value 1b
 execute if score index gui matches 19 run data modify storage practice:gui pages[{active:1b}].entries[{tag:{index:19b}}].active set value 1b
 execute if score index gui matches 20 run data modify storage practice:gui pages[{active:1b}].entries[{tag:{index:20b}}].active set value 1b
 execute if score index gui matches 21 run data modify storage practice:gui pages[{active:1b}].entries[{tag:{index:21b}}].active set value 1b

@@ -15,10 +15,13 @@ execute unless score #buried_v3 zc_ctrl matches 1 run function zeroboard:setting
 scoreboard players set #buried_v3 zc_ctrl 1
 execute unless score #spawn_order_v4 zc_ctrl matches 1 run function zeroboard:settings/migrate/spawn_v4
 scoreboard players set #spawn_order_v4 zc_ctrl 1
+execute unless score #spawn_custom_v5 zc_ctrl matches 1 run function zeroboard:settings/migrate/spawn_v5
+scoreboard players set #spawn_custom_v5 zc_ctrl 1
 
 execute if data storage practice:gui pages[1].entries[{tag:{index:4b}}] if data storage practice:gui pages[1].defaults[{tag:{index:4b}}] run function zeroboard:settings/extend/spawn
 execute if data storage practice:gui pages[1].entries[{tag:{index:3b}}] if data storage practice:gui pages[1].defaults[{tag:{index:3b}}] run function zeroboard:settings/extend/saturation
 execute if data storage practice:gui pages[1].entries[{tag:{index:7b}}] if data storage practice:gui pages[1].defaults[{tag:{index:7b}}] run function zeroboard:settings/extend/rotation
+execute if data storage practice:gui pages[1].entries[{tag:{index:8b}}] if data storage practice:gui pages[1].defaults[{tag:{index:8b}}] run function zeroboard:settings/extend/randomize
 
 # MCSR and 1.2.1 base packs predate the 1.2.2 Fire Resistance (12) and Dragon (13)
 # entries, so nothing ever sets their scores and play gates the dragon on matches 0
@@ -53,7 +56,7 @@ execute unless score #fly_order_v2 zc_ctrl matches 1 run function zeroboard:sett
 scoreboard players set #fly_order_v2 zc_ctrl 1
 data remove storage practice:gui pages[1].entries[{tag:{index:14b}}]
 data remove storage practice:gui pages[1].defaults[{tag:{index:14b}}]
-data modify storage practice:gui tmpl set value {Slot:3b,id:"minecraft:end_rod",Count:2b,size:5,value:2b,tag:{index:14b,display:{Name:'{"text":"Fly Chance","italic":"false","color":"dark_aqua"}',LoreGray:['{"text":"Ranked","color":"gray","italic":"false"}','{"text":"Vanilla","color":"gray","italic":"false"}','{"text":"No","color":"gray","italic":"false"}','{"text":"Always Fly (Y95)","color":"gray","italic":"false"}','{"text":"Custom","color":"gray","italic":"false"}'],LoreColor:['{"text":"Ranked","color":"gold","italic":"false"}','{"text":"Vanilla","color":"gold","italic":"false"}','{"text":"No","color":"gold","italic":"false"}','{"text":"Always Fly (Y95)","color":"gold","italic":"false"}','{"text":"Custom","color":"gold","italic":"false"}']}}}
+data modify storage practice:gui tmpl set value {Slot:3b,id:"minecraft:end_rod",Count:2b,size:3,value:2b,tag:{index:14b,display:{Name:'{"text":"Fly Chance","italic":"false","color":"dark_aqua"}',LoreGray:['{"text":"Ranked","color":"gray","italic":"false"}','{"text":"Vanilla","color":"gray","italic":"false"}','{"text":"No","color":"gray","italic":"false"}'],LoreColor:['{"text":"Ranked","color":"gold","italic":"false"}','{"text":"Vanilla","color":"gold","italic":"false"}','{"text":"No","color":"gold","italic":"false"}']}}}
 function zeroboard:settings/install
 scoreboard players operation fly_chance settings = #tmpl_value zc_ctrl
 
@@ -77,15 +80,9 @@ data modify storage practice:gui tmpl set value {Slot:5b,id:"minecraft:fire_char
 function zeroboard:settings/install
 scoreboard players operation fireball_chance settings = #tmpl_value zc_ctrl
 
-scoreboard players set #tmpl_value zc_ctrl -1
-scoreboard players set #tmpl_default zc_ctrl -1
-execute store result score #tmpl_value zc_ctrl run data get storage practice:gui pages[1].entries[{tag:{index:17b}}].value
-execute store result score #tmpl_default zc_ctrl run data get storage practice:gui pages[1].defaults[{tag:{index:17b}}].value
+# 1/8 Always Fly was removed in 1.1.4.1; drop the entry old worlds still carry
 data remove storage practice:gui pages[1].entries[{tag:{index:17b}}]
 data remove storage practice:gui pages[1].defaults[{tag:{index:17b}}]
-data modify storage practice:gui tmpl set value {Slot:6b,id:"minecraft:feather",Count:2b,size:4,value:0b,tag:{index:17b,display:{Name:'{"text":"1/8 Always Fly","italic":"false","color":"dark_aqua"}',LoreGray:['{"text":"Off","color":"gray","italic":"false"}','{"text":"Y92","color":"gray","italic":"false"}','{"text":"Y97","color":"gray","italic":"false"}','{"text":"Custom","color":"gray","italic":"false"}'],LoreColor:['{"text":"Off","color":"gold","italic":"false"}','{"text":"Y92","color":"gold","italic":"false"}','{"text":"Y97","color":"gold","italic":"false"}','{"text":"Custom","color":"gold","italic":"false"}']}}}
-function zeroboard:settings/install
-scoreboard players operation one_eighth_fly settings = #tmpl_value zc_ctrl
 
 scoreboard players set #tmpl_value zc_ctrl -1
 scoreboard players set #tmpl_default zc_ctrl -1

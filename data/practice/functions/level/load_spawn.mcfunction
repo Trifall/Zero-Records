@@ -2,15 +2,15 @@
 fill 96 52 -4 104 65 4 minecraft:air replace minecraft:end_stone
 setblock 100 42 0 minecraft:structure_block{posX:-22,posY:1,posZ:-15,mode:"LOAD"}
 
-# spawn list went 9 -> 19 entries. menu order is
-#   0 Natural Distribution   1 Uniformly Random   2 Random Buried
-#   3 Open   4 Overhang   5..18 Buried 52..65
-# but spawn_act keeps the base pack's numbering, so 3 and 4 are mapped back and the
-# buried entries are shifted down by 2 to land on spawn_act 3..16.
+# spawn list went 9 -> 20 entries. menu order is
+#   0 Natural Distribution   1 Uniformly Random   2 Random Buried   3 Custom
+#   4 Open   5 Overhang   6..19 Buried 52..65
+# but spawn_act keeps the base pack's numbering, so 4 and 5 are mapped back and the
+# buried entries are shifted down by 3 to land on spawn_act 3..16.
 scoreboard players operation spawn_act settings = spawn settings
-execute if score spawn settings matches 3 run scoreboard players set spawn_act settings 0
-execute if score spawn settings matches 4 run scoreboard players set spawn_act settings 1
-execute if score spawn settings matches 5..18 run scoreboard players remove spawn_act settings 2
+execute if score spawn settings matches 4 run scoreboard players set spawn_act settings 0
+execute if score spawn settings matches 5 run scoreboard players set spawn_act settings 1
+execute if score spawn settings matches 6..19 run scoreboard players remove spawn_act settings 3
 
 # natural distribution - weighted to match how often each spawn occurs in real seeds
 execute if score spawn settings matches 0 run scoreboard players set mod rng 10000
@@ -33,6 +33,9 @@ execute if score spawn settings matches 1 run scoreboard players set mod rng 16
 execute if score spawn settings matches 1 run function practice:random/generate
 execute if score spawn settings matches 1 run scoreboard players operation spawn_act settings = r rng
 execute if score spawn settings matches 1 if score spawn_act settings matches 2..15 run scoreboard players add spawn_act settings 1
+
+# custom - flat roll over the spawns ticked on the settings chest's spawn pool page
+execute if score spawn settings matches 3 run function practice:level/choose_spawn_pool
 
 execute if score spawn_act settings matches 2 run function practice:level/load_random_cage
 
