@@ -50,18 +50,6 @@ scoreboard players reset #death_skip_default zc_ctrl
 
 scoreboard players set #tmpl_value zc_ctrl -1
 scoreboard players set #tmpl_default zc_ctrl -1
-execute store result score #tmpl_value zc_ctrl run data get storage practice:gui pages[1].entries[{tag:{index:14b}}].value
-execute store result score #tmpl_default zc_ctrl run data get storage practice:gui pages[1].defaults[{tag:{index:14b}}].value
-execute unless score #fly_order_v2 zc_ctrl matches 1 run function zeroboard:settings/migrate/fly_v2
-scoreboard players set #fly_order_v2 zc_ctrl 1
-data remove storage practice:gui pages[1].entries[{tag:{index:14b}}]
-data remove storage practice:gui pages[1].defaults[{tag:{index:14b}}]
-data modify storage practice:gui tmpl set value {Slot:3b,id:"minecraft:end_rod",Count:2b,size:3,value:2b,tag:{index:14b,display:{Name:'{"text":"Fly Chance","italic":"false","color":"dark_aqua"}',LoreGray:['{"text":"Ranked","color":"gray","italic":"false"}','{"text":"Vanilla","color":"gray","italic":"false"}','{"text":"No","color":"gray","italic":"false"}'],LoreColor:['{"text":"Ranked","color":"gold","italic":"false"}','{"text":"Vanilla","color":"gold","italic":"false"}','{"text":"No","color":"gold","italic":"false"}']}}}
-function zeroboard:settings/install
-scoreboard players operation fly_chance settings = #tmpl_value zc_ctrl
-
-scoreboard players set #tmpl_value zc_ctrl -1
-scoreboard players set #tmpl_default zc_ctrl -1
 execute store result score #tmpl_value zc_ctrl run data get storage practice:gui pages[1].entries[{tag:{index:15b}}].value
 execute store result score #tmpl_default zc_ctrl run data get storage practice:gui pages[1].defaults[{tag:{index:15b}}].value
 data remove storage practice:gui pages[1].entries[{tag:{index:15b}}]
@@ -80,7 +68,9 @@ data modify storage practice:gui tmpl set value {Slot:5b,id:"minecraft:fire_char
 function zeroboard:settings/install
 scoreboard players operation fireball_chance settings = #tmpl_value zc_ctrl
 
-# 1/8 Always Fly was removed in 1.1.4.1; drop the entry old worlds still carry
+# Fly Chance (1.1.4.2) and 1/8 Always Fly (1.1.4.1) were removed; drop the entries old worlds still carry
+data remove storage practice:gui pages[1].entries[{tag:{index:14b}}]
+data remove storage practice:gui pages[1].defaults[{tag:{index:14b}}]
 data remove storage practice:gui pages[1].entries[{tag:{index:17b}}]
 data remove storage practice:gui pages[1].defaults[{tag:{index:17b}}]
 

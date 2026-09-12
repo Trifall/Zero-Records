@@ -16,9 +16,8 @@ execute as @e[tag=tower] at @s run setblock ~ 68 ~ minecraft:air
 # vanilla caches its 24 path-node heights on the dragon's first pathfind. do the
 # temporary terrain edits now, before the dragon spawns next tick, and put the
 # visible terrain back once the heights are cached.
-execute if score fly_chance settings matches 0 run function practice:level/ranked_nodes
-execute if score fly_chance settings matches 2 in minecraft:the_end run fill 28 60 -29 28 58 -29 air
-execute if score fly_chance settings matches 2 in minecraft:the_end run fill -29 59 28 -20 58 28 air
+execute in minecraft:the_end run fill 28 60 -29 28 58 -29 air
+execute in minecraft:the_end run fill -29 59 28 -20 58 28 air
 
 # the restore has to outlive the dragon's first pathfinding tick, which a fixed
 # delay from here cannot promise (2t landed in the same function phase as the
