@@ -11,4 +11,6 @@ data modify storage practice:gui settings_view append from storage practice:gui 
 execute if data storage practice:gui settings_view[{tag:{index:16b}}] run data modify storage practice:gui settings_view[{tag:{index:16b}}].Slot set value 13b
 data modify storage practice:gui settings_view append from storage practice:gui pages[1].entries[{tag:{index:13b}}]
 execute if data storage practice:gui settings_view[{tag:{index:13b}}] run data modify storage practice:gui settings_view[{tag:{index:13b}}].Slot set value 14b
+data modify storage practice:gui settings_view append value {Slot:15b,id:"minecraft:barrier",Count:1b,tag:{index:26b,display:{Name:'{"text":"Empty","color":"red","italic":false}'}}}
+data modify storage practice:gui settings_view append value {Slot:16b,id:"minecraft:barrier",Count:1b,tag:{index:26b,display:{Name:'{"text":"Empty","color":"red","italic":false}'}}}
 data modify storage practice:gui settings_view append value {Slot:17b,id:"minecraft:arrow",Count:1b,tag:{index:25b,display:{Name:'{"text":"Run Settings","color":"green","italic":false}',Lore:['{"text":"player and world setup","color":"gray","italic":false}']}}}
