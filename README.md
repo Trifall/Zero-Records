@@ -1,31 +1,18 @@
 # Zero Records
 
-A Minecraft Java Edition datapack (1.16.x) that extends [Zero Practice v1.2.2 by Mescht]([https://github.com/Mescht/Zero-Practice]) — a zero-cycle dragon fight practice pack — with kill record keeping, dragon flight prediction, and expanded settings.
+Supports Minecraft Java 1.16.1 with Zero Practice 1.2.1, Zero Practice 1.2.2,
+and the Zero mode in Dibedy's MCSR Practice 2.0.0.
 
-## Features
+Put this folder or ZIP in the world's `datapacks` directory and enable it last
+(highest priority), after the original Zero pack and MCSR's LobbySystem.
+Use `/reload` after installation. Keep the original packs installed.
 
-- **Kill records archive** – every dragon kill is logged with its time, tower height, explosives count, approach type, standing height, pickaxe tier, and spawn setup. Includes personal bests, unique-record grouping, filters, and a clear-all flow.
-- **Flydown prediction** – runs a tick-by-tick simulation of the ender dragon's flight physics (motion integration + block collision scanning) to predict where and when the dragon will fly down to the fountain, announced in chat.
-- **Expanded settings** – saturation/hunger control, angle labels, and other quality-of-life options layered on top of the base pack.
-- **In-world leaderboard & menu** – a lobby leaderboard display plus a "Zero Cycle Filters" menu for browsing, filtering, and paging through records.
+In MCSR, enter Zero with `/trigger zero` and leave with `/trigger hub` as usual.
+The add-on keeps its priority when Zero is enabled again, stops its background
+work outside Zero mode, and cancels pending dragon spawns and player teleports
+when switching modes. Records and settings persist between visits.
 
-## Requirements
+Zero 1.2.1 keeps using its existing loadouts; no storage migration is needed.
+This pack includes the missing path tracer and the timer-display fix.
 
-- Minecraft Java Edition 1.16.1
-- One of: **Zero Practice v1.2.1 or v1.2.2 by Mescht**, or the Zero mode in **MCSR Practice 2.0.0 by Dibedy**. This pack must load **above** the base pack (and above MCSR's LobbySystem).
-
-## Installation
-
-1. Download both datapacks and place them in your world's `datapacks/` folder.
-2. Ensure Zero Records sits above Zero Practice (and LobbySystem in MCSR) in the load order (`/datapack list`).
-3. Reload with `/reload`.
-
-## Usage
-
-- Play Zero Practice as usual — kills are recorded automatically.
-- In MCSR Practice, enter Zero with `/trigger zero` and leave with `/trigger hub`; records and settings persist between visits.
-- In the lobby, right-click the **Zero Cycle Filters** chest to open the records menu (browse pages, toggle filters, clear records).
-
----
-
-Made by lollip0529 on Discord — contact if anything is needed.
+Zero Natural End is a separate add-on and is not required.

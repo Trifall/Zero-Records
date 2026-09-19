@@ -50,6 +50,16 @@ scoreboard players reset #death_skip_default zc_ctrl
 
 scoreboard players set #tmpl_value zc_ctrl -1
 scoreboard players set #tmpl_default zc_ctrl -1
+execute store result score #tmpl_value zc_ctrl run data get storage practice:gui pages[1].entries[{tag:{index:14b}}].value
+execute store result score #tmpl_default zc_ctrl run data get storage practice:gui pages[1].defaults[{tag:{index:14b}}].value
+data remove storage practice:gui pages[1].entries[{tag:{index:14b}}]
+data remove storage practice:gui pages[1].defaults[{tag:{index:14b}}]
+data modify storage practice:gui tmpl set value {Slot:3b,id:"minecraft:end_rod",Count:2b,size:3,value:1b,tag:{index:14b,display:{Name:'{"text":"Fly Chance","italic":"false","color":"dark_aqua"}',LoreGray:['{"text":"Ranked","color":"gray","italic":"false"}','{"text":"Vanilla","color":"gray","italic":"false"}','{"text":"Minimal","color":"gray","italic":"false"}'],LoreColor:['{"text":"Ranked","color":"gold","italic":"false"}','{"text":"Vanilla","color":"gold","italic":"false"}','{"text":"Minimal","color":"gold","italic":"false"}']}}}
+function zeroboard:settings/install
+scoreboard players operation fly_chance settings = #tmpl_value zc_ctrl
+
+scoreboard players set #tmpl_value zc_ctrl -1
+scoreboard players set #tmpl_default zc_ctrl -1
 execute store result score #tmpl_value zc_ctrl run data get storage practice:gui pages[1].entries[{tag:{index:15b}}].value
 execute store result score #tmpl_default zc_ctrl run data get storage practice:gui pages[1].defaults[{tag:{index:15b}}].value
 data remove storage practice:gui pages[1].entries[{tag:{index:15b}}]
@@ -68,11 +78,21 @@ data modify storage practice:gui tmpl set value {Slot:5b,id:"minecraft:fire_char
 function zeroboard:settings/install
 scoreboard players operation fireball_chance settings = #tmpl_value zc_ctrl
 
-# Fly Chance (1.1.4.2) and 1/8 Always Fly (1.1.4.1) were removed; drop the entries old worlds still carry
-data remove storage practice:gui pages[1].entries[{tag:{index:14b}}]
-data remove storage practice:gui pages[1].defaults[{tag:{index:14b}}]
+# 1/8 Always Fly was removed in 1.1.4.1; index 17 is Timing Tracker now, so drop the
+# old entry once instead of carrying its value over
+execute unless score #timing_v1 zc_ctrl matches 1 run data remove storage practice:gui pages[1].entries[{tag:{index:17b}}]
+execute unless score #timing_v1 zc_ctrl matches 1 run data remove storage practice:gui pages[1].defaults[{tag:{index:17b}}]
+scoreboard players set #timing_v1 zc_ctrl 1
+
+scoreboard players set #tmpl_value zc_ctrl -1
+scoreboard players set #tmpl_default zc_ctrl -1
+execute store result score #tmpl_value zc_ctrl run data get storage practice:gui pages[1].entries[{tag:{index:17b}}].value
+execute store result score #tmpl_default zc_ctrl run data get storage practice:gui pages[1].defaults[{tag:{index:17b}}].value
 data remove storage practice:gui pages[1].entries[{tag:{index:17b}}]
 data remove storage practice:gui pages[1].defaults[{tag:{index:17b}}]
+data modify storage practice:gui tmpl set value {Slot:6b,id:"minecraft:clock",Count:1b,size:2,value:0b,tag:{index:17b,display:{Name:'{"text":"Timing Tracker","italic":"false","color":"dark_aqua"}',LoreGray:['{"text":"On","color":"gray","italic":"false"}','{"text":"Off","color":"gray","italic":"false"}','{"text":"","italic":"false"}','{"text":"Prints the time of every arrow hit","color":"dark_gray","italic":"false"}','{"text":"and bed explosion","color":"dark_gray","italic":"false"}'],LoreColor:['{"text":"On","color":"gold","italic":"false"}','{"text":"Off","color":"gold","italic":"false"}','{"text":"","italic":"false"}','{"text":"Prints the time of every arrow hit","color":"dark_gray","italic":"false"}','{"text":"and bed explosion","color":"dark_gray","italic":"false"}']}}}
+function zeroboard:settings/install
+scoreboard players operation timing_tracker settings = #tmpl_value zc_ctrl
 
 scoreboard players set #tmpl_value zc_ctrl -1
 scoreboard players set #tmpl_default zc_ctrl -1

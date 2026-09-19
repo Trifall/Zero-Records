@@ -14,8 +14,10 @@ execute store result score show_nodes settings run data get storage practice:gui
 execute store result score pearl_tracker settings run data get storage practice:gui pages[1].entries[{tag:{index:11b}}].value
 execute store result score fireres settings run data get storage practice:gui pages[1].entries[{tag:{index:12b}}].value
 execute store result score disable_dragon settings run data get storage practice:gui pages[1].entries[{tag:{index:13b}}].value
+execute store result score fly_chance settings run data get storage practice:gui pages[1].entries[{tag:{index:14b}}].value
 execute store result score crystal_break settings run data get storage practice:gui pages[1].entries[{tag:{index:15b}}].value
 execute store result score fireball_chance settings run data get storage practice:gui pages[1].entries[{tag:{index:16b}}].value
+execute store result score timing_tracker settings run data get storage practice:gui pages[1].entries[{tag:{index:17b}}].value
 execute store result score vanilla_entry settings run data get storage practice:gui pages[1].entries[{tag:{index:19b}}].value
 
 function practice:gui/pages/home/enable_all_towers
