@@ -1,0 +1,4 @@
+execute if score #sim_slow zc_ctrl matches 0 positioned ~-0.5 ~1 ~-0.5 unless block ~ ~ ~ #zeroboard:dragon_passable run scoreboard players set #sim_slow zc_ctrl 1
+execute if score #sim_slow zc_ctrl matches 0 positioned ~0.5 ~1 ~-0.5 unless block ~ ~ ~ #zeroboard:dragon_passable run scoreboard players set #sim_slow zc_ctrl 1
+execute if score #sim_slow zc_ctrl matches 0 positioned ~-0.5 ~1 ~0.5 unless block ~ ~ ~ #zeroboard:dragon_passable run scoreboard players set #sim_slow zc_ctrl 1
+execute if score #sim_slow zc_ctrl matches 0 positioned ~0.5 ~1 ~0.5 unless block ~ ~ ~ #zeroboard:dragon_passable run scoreboard players set #sim_slow zc_ctrl 1

@@ -74,4 +74,3 @@ data modify storage zeroboard:records records prepend from storage zeroboard:rec
 function zeroboard:prediction/predict
 
 scoreboard players set #dirty zc_ctrl 1
-tellraw @a {"text":"  Full completion saved to the Zero Cycle Archive.","color":"dark_gray"}
