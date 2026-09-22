@@ -19,6 +19,7 @@ execute store result score crystal_break settings run data get storage practice:
 execute store result score fireball_chance settings run data get storage practice:gui pages[1].entries[{tag:{index:16b}}].value
 execute store result score timing_tracker settings run data get storage practice:gui pages[1].entries[{tag:{index:17b}}].value
 execute store result score vanilla_entry settings run data get storage practice:gui pages[1].entries[{tag:{index:19b}}].value
+execute store result score abandon_info settings run data get storage practice:gui pages[1].entries[{tag:{index:20b}}].value
 
 function practice:gui/pages/home/enable_all_towers
 function practice:gui/pages/settings/spawn_pool/enable_all
