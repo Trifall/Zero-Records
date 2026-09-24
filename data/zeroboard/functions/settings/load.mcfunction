@@ -104,13 +104,29 @@ data modify storage practice:gui tmpl set value {Slot:7b,id:"minecraft:end_porta
 function zeroboard:settings/install
 scoreboard players operation vanilla_entry settings = #tmpl_value zc_ctrl
 
+# Natural Terrain shipped on by default in the test builds; drop that entry once so
+# it comes back off
+execute unless score #natural_v2 zc_ctrl matches 1 run data remove storage practice:gui pages[1].entries[{tag:{index:20b}}]
+execute unless score #natural_v2 zc_ctrl matches 1 run data remove storage practice:gui pages[1].defaults[{tag:{index:20b}}]
+scoreboard players set #natural_v2 zc_ctrl 1
+
 scoreboard players set #tmpl_value zc_ctrl -1
 scoreboard players set #tmpl_default zc_ctrl -1
-execute store result score #tmpl_value zc_ctrl run data get storage practice:gui pages[1].entries[{tag:{index:20b}}].value
-execute store result score #tmpl_default zc_ctrl run data get storage practice:gui pages[1].defaults[{tag:{index:20b}}].value
+execute if data storage practice:gui pages[1].entries[{tag:{index:20b}}] store result score #tmpl_value zc_ctrl run data get storage practice:gui pages[1].entries[{tag:{index:20b}}].value
+execute if data storage practice:gui pages[1].defaults[{tag:{index:20b}}] store result score #tmpl_default zc_ctrl run data get storage practice:gui pages[1].defaults[{tag:{index:20b}}].value
 data remove storage practice:gui pages[1].entries[{tag:{index:20b}}]
 data remove storage practice:gui pages[1].defaults[{tag:{index:20b}}]
-data modify storage practice:gui tmpl set value {Slot:8b,id:"minecraft:oak_sign",Count:1b,size:2,value:1b,tag:{index:20b,display:{Name:'{"text":"Reset Info","italic":"false","color":"dark_aqua"}',LoreGray:['{"text":"On","color":"gray","italic":"false"}','{"text":"Off","color":"gray","italic":"false"}','{"text":"","italic":"false"}','{"text":"Prints tower, type and spawn","color":"dark_gray","italic":"false"}','{"text":"on death and manual reset","color":"dark_gray","italic":"false"}'],LoreColor:['{"text":"On","color":"gold","italic":"false"}','{"text":"Off","color":"gold","italic":"false"}','{"text":"","italic":"false"}','{"text":"Prints tower, type and spawn","color":"dark_gray","italic":"false"}','{"text":"on death and manual reset","color":"dark_gray","italic":"false"}']}}}
+data modify storage practice:gui tmpl set value {Slot:8b,id:"minecraft:chorus_flower",Count:1b,size:2,value:1b,tag:{index:20b,display:{Name:'{"text":"Natural Terrain","italic":"false","color":"dark_aqua"}',LoreGray:['{"text":"On","color":"gray","italic":"false"}','{"text":"Off","color":"gray","italic":"false"}','{"text":"","italic":"false"}','{"text":"Real End terrain around the spawn","color":"dark_gray","italic":"false"}','{"text":"instead of the stand-in cages","color":"dark_gray","italic":"false"}'],LoreColor:['{"text":"On","color":"gold","italic":"false"}','{"text":"Off","color":"gold","italic":"false"}','{"text":"","italic":"false"}','{"text":"Real End terrain around the spawn","color":"dark_gray","italic":"false"}','{"text":"instead of the stand-in cages","color":"dark_gray","italic":"false"}']}}}
+function zeroboard:settings/install
+scoreboard players operation natural_terrain settings = #tmpl_value zc_ctrl
+
+scoreboard players set #tmpl_value zc_ctrl -1
+scoreboard players set #tmpl_default zc_ctrl -1
+execute store result score #tmpl_value zc_ctrl run data get storage practice:gui pages[1].entries[{tag:{index:21b}}].value
+execute store result score #tmpl_default zc_ctrl run data get storage practice:gui pages[1].defaults[{tag:{index:21b}}].value
+data remove storage practice:gui pages[1].entries[{tag:{index:21b}}]
+data remove storage practice:gui pages[1].defaults[{tag:{index:21b}}]
+data modify storage practice:gui tmpl set value {Slot:18b,id:"minecraft:oak_sign",Count:1b,size:2,value:1b,tag:{index:21b,display:{Name:'{"text":"Reset Info","italic":"false","color":"dark_aqua"}',LoreGray:['{"text":"On","color":"gray","italic":"false"}','{"text":"Off","color":"gray","italic":"false"}','{"text":"","italic":"false"}','{"text":"Prints tower, type and spawn","color":"dark_gray","italic":"false"}','{"text":"on death and manual reset","color":"dark_gray","italic":"false"}'],LoreColor:['{"text":"On","color":"gold","italic":"false"}','{"text":"Off","color":"gold","italic":"false"}','{"text":"","italic":"false"}','{"text":"Prints tower, type and spawn","color":"dark_gray","italic":"false"}','{"text":"on death and manual reset","color":"dark_gray","italic":"false"}']}}}
 function zeroboard:settings/install
 scoreboard players operation abandon_info settings = #tmpl_value zc_ctrl
 

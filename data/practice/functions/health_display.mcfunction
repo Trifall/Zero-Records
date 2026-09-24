@@ -1,12 +1,11 @@
 scoreboard players operation last health = current health
 
 # live fight reads health off the absorption pool, see zeroboard:health/sample.
-# onecycle and the fountain flight still read Health straight off the entity
+# the fountain flight still reads Health straight off the entity
 scoreboard players set #live_fight zc_ctrl 0
-execute unless score onecycle flags matches 1 unless score flying_to_fountain flags matches 1 unless score in_lobby flags matches 1 run scoreboard players set #live_fight zc_ctrl 1
+execute unless score flying_to_fountain flags matches 1 unless score in_lobby flags matches 1 run scoreboard players set #live_fight zc_ctrl 1
 execute if score #live_fight zc_ctrl matches 1 if entity @e[type=minecraft:ender_dragon,limit=1] run function zeroboard:health/sample
 execute if score #live_fight zc_ctrl matches 1 if entity @e[type=minecraft:ender_dragon,limit=1] run function zeroboard:health/perch_damage
-execute if score onecycle flags matches 1 store result score current health run data get entity @e[type=minecraft:ender_dragon,limit=1] Health
 execute if score flying_to_fountain flags matches 1 store result score current health run data get entity @e[type=minecraft:ender_dragon,limit=1] Health
 
 scoreboard players operation diff health = last health

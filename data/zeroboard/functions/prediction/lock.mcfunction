@@ -30,7 +30,3 @@ execute if score #lock_valid zc_ctrl matches 1 run data modify storage zeroboard
 execute if score #lock_valid zc_ctrl matches 1 if score #prediction_announced zc_ctrl matches 0 run function zeroboard:prediction/announce
 execute if score #lock_valid zc_ctrl matches 1 if score #prediction_announced zc_ctrl matches 1 run function zeroboard:records/personal_best/rebuild
 execute if score #lock_valid zc_ctrl matches 1 run scoreboard players set #dirty zc_ctrl 1
-execute if score #lock_valid zc_ctrl matches 1 store result storage zeroboard:debug actual.arrival_ticks int 1 run scoreboard players get #arrival_ticks zc_ctrl
-execute if score #lock_valid zc_ctrl matches 1 store result storage zeroboard:debug actual.flight_ticks int 1 run scoreboard players get #actual_flight zc_ctrl
-execute if score #lock_valid zc_ctrl matches 1 store result storage zeroboard:debug actual.flight_error int 1 run scoreboard players get #flight_error zc_ctrl
-execute if score #lock_valid zc_ctrl matches 1 store result storage zeroboard:debug actual.guard int 1 run scoreboard players get #prediction_guard zc_ctrl

@@ -24,6 +24,3 @@ execute if score #finish_valid zc_ctrl matches 1 run data modify storage zeroboa
 execute if score #finish_valid zc_ctrl matches 1 if score #prediction_announced zc_ctrl matches 0 run function zeroboard:prediction/announce
 execute if score #finish_valid zc_ctrl matches 1 run function zeroboard:records/personal_best/rebuild
 execute if score #finish_valid zc_ctrl matches 1 run scoreboard players set #dirty zc_ctrl 1
-execute if score #finish_valid zc_ctrl matches 1 store result storage zeroboard:debug actual.observed_finish_ticks int 1 run scoreboard players get #observed_finish zc_ctrl
-execute if score #finish_valid zc_ctrl matches 1 store result storage zeroboard:debug actual.death_tail_ticks int 1 run scoreboard players get #death_tail zc_ctrl
-execute if score #finish_valid zc_ctrl matches 1 store result storage zeroboard:debug actual.finish_observation_error int 1 run scoreboard players get #finish_observation_error zc_ctrl

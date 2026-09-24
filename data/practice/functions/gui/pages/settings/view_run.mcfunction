@@ -7,8 +7,8 @@ data modify storage practice:gui settings_view append from storage practice:gui 
 execute if data storage practice:gui settings_view[{tag:{index:19b}}] run data modify storage practice:gui settings_view[{tag:{index:19b}}].Slot set value 12b
 data modify storage practice:gui settings_view append from storage practice:gui pages[1].entries[{tag:{index:4b}}]
 execute if data storage practice:gui settings_view[{tag:{index:4b}}] run data modify storage practice:gui settings_view[{tag:{index:4b}}].Slot set value 13b
-data modify storage practice:gui settings_view append from storage practice:gui pages[1].entries[{tag:{index:12b}}]
-execute if data storage practice:gui settings_view[{tag:{index:12b}}] run data modify storage practice:gui settings_view[{tag:{index:12b}}].Slot set value 14b
+data modify storage practice:gui settings_view append from storage practice:gui pages[1].entries[{tag:{index:20b}}]
+execute if data storage practice:gui settings_view[{tag:{index:20b}}] run data modify storage practice:gui settings_view[{tag:{index:20b}}].Slot set value 14b
 data modify storage practice:gui settings_view append from storage practice:gui pages[1].entries[{tag:{index:6b}}]
 execute if data storage practice:gui settings_view[{tag:{index:6b}}] run data modify storage practice:gui settings_view[{tag:{index:6b}}].Slot set value 15b
 data modify storage practice:gui settings_view append value {Slot:9b,id:"minecraft:arrow",Count:1b,tag:{index:24b,display:{Name:'{"text":"Dragon Settings","color":"light_purple","italic":false}',Lore:['{"text":"approach and dragon behaviour","color":"gray","italic":false}']}}}

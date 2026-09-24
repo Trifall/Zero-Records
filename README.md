@@ -10,8 +10,10 @@ Roughly what it adds:
 - a flydown predictor: right after the kill it simulates the rest of the flight
   and prints the predicted finish time, so you don't have to wait for it
 - extra settings pages on top of the base ones: Dragon (Fly Chance, Fireball
-  Chance, On Crystal Break, Vanilla End Entry), Info (Timing Tracker and
-  friends) and a Custom Spawns pool
+  Chance, On Crystal Break, Vanilla End Entry), Info (Timing Tracker, Fire
+  Resistance and friends) and a Custom Spawns pool
+- a Natural Terrain option next to Spawn: real End terrain around every spawn
+  instead of Mescht's stand-in cages (off by default)
 
 ## Installing
 
@@ -32,4 +34,7 @@ path tracer 1.2.1 is missing and the timer display fix.
 Run `/function zeroboard:settings/restore_chain_length` before you take the pack
 out. The predictor raises maxCommandChainLength and that puts it back.
 
-Zero Natural End is a separate add-on, you don't need it for this one.
+Zero Natural End's terrain is built in: turn on Natural Terrain on the Run
+Settings page and every spawn loads real End terrain that matches it instead of
+Mescht's stand-in, blended into his island. Don't install Zero Natural End next
+to this, it's only for running the base map without Records.
